@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('babel-register')
 const meow = require('meow')
 const reduce = require('object-loops/reduce')
 const read = require('read-input')

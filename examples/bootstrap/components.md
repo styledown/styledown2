@@ -24,7 +24,7 @@ dismissal, use the alerts jQuery plugin.
 ### list-group
 Simple lists and elements using `.list-group` and `.list-group-item`.
 
-```example.haml
+```example.jade.-clear
 ul.list-group
   li.list-group-item Apple
   li.list-group-item Orange
@@ -34,7 +34,7 @@ ul.list-group
 #### With badges
 Use `span.badge`.
 
-```example.jade
+```example.jade.-clear
 ul.list-group
   li.list-group-item
     span.badge 23
@@ -84,12 +84,12 @@ ul.pager
 Used for labelling things that need labels.
 
 ```example.jade
-<span class="label label-default">Default</span>
-<span class="label label-primary">Primary</span>
-<span class="label label-success">Success</span>
-<span class="label label-info">Info</span>
-<span class="label label-warning">Warning</span>
-<span class="label label-danger">Danger</span>
+span.label.label-default Default
+span.label.label-primary Primary
+span.label.label-success Success
+span.label.label-info Info
+span.label.label-warning Warning
+span.label.label-danger Danger
 ```
 
 ### breadcrumbs

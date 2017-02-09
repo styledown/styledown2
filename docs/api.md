@@ -49,10 +49,14 @@ Renders to HTML, where `data` is assumed to be the output of [styledown.parse](#
 
 ```js
 var data = styledown.parse([
-  { name: 'buttons.md', contents: /*snip*/ }
+  { name: 'buttons.md', contents: /*snip*/ },
+  { name: 'forms.md', contents: /*snip*/ },
 ])
 
-var result = styledown.render(data, filename)
+result = styledown.render(data, 'buttons.md')
+result = styledown.render(data, 'forms.md')
+result = styledown.render(data, 'forms.md', { block: 'body' })
+result = styledown.render(data, 'forms.md', { block: 'menu' })
 ```
 
 These options may be given (all optional):

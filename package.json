@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "ava": "0.14.0",
-    "brfs": "1.4.3",
     "browserify": "13.0.0",
     "docpress": "0.6.11",
     "git-update-ghpages": "1.3.0",
@@ -57,8 +56,8 @@
     "url": "git+ssh://git@github.com/styledown/styledown.git"
   },
   "scripts": {
-    "build": "browserify external.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",
-    "build:min": "browserify external.js -t brfs -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
+    "build": "browserify external.js -t babelify -s Styledown > dist/styledown-external.js",
+    "build:min": "browserify external.js -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
     "test": "ava"
   },
   "babel": {

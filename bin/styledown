@@ -103,7 +103,7 @@ read(cli.input)
   let output
   switch (cli.flags.mode) {
     case 'html':
-      const files = renderAll(data)
+      const files = renderAll(data, opts.render)
       write(files, cli.flags.output || '-')
       break
 
@@ -127,11 +127,12 @@ read(cli.input)
  * Render many files
  */
 
-function renderAll (data, dir) {
-  return reduce(data.files, (result, file, fname) => {
-    const outname = fname.replace(/\.md$/, '.html')
-    result[outname] = {
-      contents: styledown.render(data, fname, opts.render)
+function renderAll (data, options) {
+  templates = styledown.build(data)
+
+  return reduce(templates.files, (result, file, fname) => {
+    result[fname] = {
+      contents: styledown.render(templates, fname, options)
     }
     return result
   }, {})

@@ -1,9 +1,11 @@
 #!/usr/bin/env node
-var meow = require('meow')
-var styledown = require('../index')
-var read = require('read-input')
-var fs = require('fs')
-var path = require('path')
+const meow = require('meow')
+const styledown = require('../index')
+const reduce = require('object-loops/reduce')
+const forEach = require('object-loops/for-each')
+const read = require('read-input')
+const fs = require('fs')
+const path = require('path')
 
 /*
  * CLI/Minimist
@@ -14,16 +16,20 @@ var cli = require('meow')([
   '  $ styledown FILES...',
   '',
   'Output formats:',
+  '  -H, --html              output rendered HTML',
+  '      --data              output raw data (default)',
+  '      --templates         output templates',
+  '',
+  'Output formats: (only for --data and --templates)',
   '      --json              parse into JSON data (default)',
   '      --yaml              parse into YAML data',
-  '  -H, --html              render as HTML',
   '',
   'Parsing options:',
-  '  -t, --transform LANG    transpiles examples of given LANG',
+  '  -t, --transform LANG    transpiles examples of given LANG (comma-separated)',
   '',
   'Rendering options:',
   '  -l, --layout FILE       uses FILE as an HTML layout',
-  '  -o, --outdir DIR        render output HTML to DIR (implies --html)',
+  '  -o, --output DIR        render output HTML to DIR (implies --html)',
   '',
   'Other options:',
   '  -h, --help              show usage information',
@@ -38,10 +44,10 @@ var cli = require('meow')([
   "  styledown *.md -t jade    # transpiles 'example.jade' sections"
 ].join('\n'), {
   boolean: ['help', 'version', 'yaml', 'json', 'html'],
-  string: ['format', 'transform', 'outdir', 'layout'],
+  string: ['format', 'transform', 'output', 'layout'],
   alias: {
     h: 'help', v: 'version',
-    H: 'html', t: 'transform', o: 'outdir', l: 'layout',
+    H: 'html', t: 'transform', o: 'output', l: 'layout',
     yml: 'yaml'
   }
 })
@@ -50,10 +56,17 @@ var cli = require('meow')([
  * Implied options
  */
 
-if (cli.flags.outdir) cli.flags.html = true
+if (cli.flags.output) cli.flags.html = true
+
 if (typeof cli.flags.transform === 'string') {
-  cli.flags.transform = [cli.flags.transform]
+  cli.flags.transform = cli.flags.transform.split(',')
 }
+
+cli.flags.mode =
+  cli.flags.html ? 'html' :
+  cli.flags.data ? 'data' :
+  cli.flags.templates ? 'templates' :
+  'data'
 
 /*
  * Options to send to styledown.parse() and styledown.render()
@@ -84,29 +97,50 @@ read(cli.input)
     if (file.error) throw file.error
   })
 
-  var output = styledown.parse(res.files, opts.parse)
+  var data = styledown.parse(res.files, opts.parse)
 
-  if (cli.flags.outdir) {
-    renderToDir(output, cli.flags.outdir)
+  // if (cli.flags.mode === 'html') {
+  if (cli.flags.output) {
+    const files = renderAll(data)
+    writeFiles(files, cli.flags.output)
   } else if (cli.flags.html) {
-    renderToStdout(output)
+    renderToStdout(data)
   } else if (cli.flags.yaml) {
-    parseToYaml(output)
+    parseToYaml(data)
   } else {
-    parseToJson(output)
+    parseToJson(data)
   }
 })
 
 /*
- * Render to dir (--outdir dir)
+ * Render many files
  */
 
-function renderToDir (output, dir) {
+function renderAll (data, dir) {
+  return reduce(data.files, (result, file, fname) => {
+    const outname = fname.replace(/\.md$/, '.html')
+    result[outname] = {
+      contents: styledown.render(data, fname, opts.render)
+    }
+    return result
+  }, {})
+}
+
+/**
+ * Writes files to a folder.
+ *
+ *     files = {
+ *       'readme.html': { contents: '...' }
+ *     }
+ *
+ *     writeFiles(files, __dirname)
+ */
+
+function writeFiles (files, dir) {
   require('mkdirp').sync(dir)
-  Object.keys(output.files).forEach(function (fname) {
-    fs.writeFileSync(
-      path.join(dir, fname).replace(/\.md$/, '.html'),
-      styledown.render(output, fname, opts.render), 'utf-8')
+
+  forEach(files, (file, fname) => {
+    fs.writeFileSync(path.join(dir, fname), file.contents, 'utf-8')
   })
 }
 

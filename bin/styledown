@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 const meow = require('meow')
-const styledown = require('../index')
 const reduce = require('object-loops/reduce')
-const forEach = require('object-loops/for-each')
 const read = require('read-input')
 const fs = require('fs')
 const path = require('path')
+const styledown = require('../index')
+const write = require('../lib/cli/write')
 
 /*
  * CLI/Minimist
@@ -24,16 +24,16 @@ var cli = require('meow')([
   '      --json              parse into JSON data (default)',
   '      --yaml              parse into YAML data',
   '',
-  'Parsing options:',
-  '  -t, --transform LANG    transpiles examples of given LANG (comma-separated)',
-  '',
   'Rendering options:',
-  '  -l, --layout FILE       uses FILE as an HTML layout',
   '  -o, --output DIR        render output HTML to DIR (implies --html)',
   '',
   'Other options:',
   '  -h, --help              show usage information',
   '  -v, --version           print version info and exit',
+  '',
+  'To be deprecated:',
+  '  -t, --transform LANG    transpiles examples of given LANG (comma-separated)',
+  '  -l, --layout FILE       uses FILE as an HTML layout',
   '',
   'Examples:',
   '',
@@ -99,16 +99,26 @@ read(cli.input)
 
   var data = styledown.parse(res.files, opts.parse)
 
-  // if (cli.flags.mode === 'html') {
-  if (cli.flags.output) {
-    const files = renderAll(data)
-    writeFiles(files, cli.flags.output)
-  } else if (cli.flags.html) {
-    renderToStdout(data)
-  } else if (cli.flags.yaml) {
-    parseToYaml(data)
-  } else {
-    parseToJson(data)
+  let output
+  switch (cli.flags.mode) {
+    case 'html':
+      const files = renderAll(data)
+      write(files, cli.flags.output || '-')
+      break
+
+    case 'data':
+      output = cli.flags.yaml ? toYaml(data) : toJson(data)
+      write(output, cli.flags.output || '-')
+      break
+
+    case 'templates':
+      const templates = styledown.build(data)
+      output = cli.flags.yaml ? toYaml(templates) : toJson(templates)
+      write(output, cli.flags.output || '-')
+      break
+
+    default:
+      console.warn('!! not implemented')
   }
 })
 
@@ -126,48 +136,20 @@ function renderAll (data, dir) {
   }, {})
 }
 
-/**
- * Writes files to a folder.
- *
- *     files = {
- *       'readme.html': { contents: '...' }
- *     }
- *
- *     writeFiles(files, __dirname)
- */
-
-function writeFiles (files, dir) {
-  require('mkdirp').sync(dir)
-
-  forEach(files, (file, fname) => {
-    fs.writeFileSync(path.join(dir, fname), file.contents, 'utf-8')
-  })
-}
-
-/*
- * Render to stdout (--html)
- */
-
-function renderToStdout (output) {
-  Object.keys(output.files).forEach(function (fname) {
-    process.stdout.write(styledown.render(output, fname, opts.render))
-  })
-}
-
 /*
  * Parse to YAML (--yaml)
  */
 
-function parseToYaml (output) {
-  console.log(require('js-yaml').safeDump(output))
+function toYaml (data) {
+  return require('js-yaml').safeDump(data)
 }
 
 /*
  * Parse to JSON (default, --json)
  */
 
-function parseToJson (output) {
-  console.log(JSON.stringify(output, null, 2))
+function toJson (data) {
+  return JSON.stringify(data, null, 2)
 }
 
 /*

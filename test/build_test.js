@@ -130,3 +130,34 @@ test('anchor', t => {
     '</ul>'
   ].join(''))
 })
+
+
+// TODO: active is not being passed
+
+test('anchor with sub headings', t => {
+  var out = styledown.parse([
+    { name: 'README.md',
+      data: r(`
+        # Table of Contents
+        * [Components](components.md)
+        * [Other components](components.md#hi)
+      `) },
+    { name: 'components.md',
+      data: '# Components\n\n## Hello\n\n## World' }
+  ])
+
+  var data = styledown.build(out)
+  var html = data.files['components.html'].sections.menu
+
+  t.deepEqual(html, [
+    '<ul class="styleguide-menu">',
+    '<li class="styleguide-menu-item -level-1">',
+    '<a href="components.html" class="link title">Components</a>',
+    '</li>',
+    '<li class="styleguide-menu-item -level-1">',
+    '<a href="components.html#hi" class="link title">Other components</a>',
+    '</li>',
+    '</ul>'
+  ].join(''))
+})
+

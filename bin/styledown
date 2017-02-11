@@ -21,11 +21,11 @@ var cli = require('meow')(dedent `
     -H, --html              output rendered HTML (default)
         --data              output raw data
 
-  Data output options: (only for --data)
+  Data output options: (implies --data)
         --json              parse into JSON data (default)
         --yaml              parse into YAML data
 
-  HTML output options: (only for --html)
+  HTML output options: (implies --html)
     -o, --output DIR        render output HTML to DIR
 
   Other options:

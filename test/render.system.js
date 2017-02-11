@@ -14,3 +14,12 @@ test('render: partials', t => {
   })
   t.deepEqual(html, '<div>hello world</div>')
 })
+
+test('render: recursive partials', t => {
+  const html = render({ user: { name: 'world' } }, {
+    html: '<div>{{> msg}}</div>',
+    msg: '{{#user}}{{> greeting}}{{/user}}',
+    greeting: 'hello {{name}}'
+  })
+  t.deepEqual(html, '<div>hello world</div>')
+})

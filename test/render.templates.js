@@ -5,6 +5,7 @@ var normalize = require('../support/normalize')
 
 test('render/templates: templates', t => {
   const data = {
+    title: 'Hello',
     sections: [
       {
         depth: 2,
@@ -19,6 +20,10 @@ test('render/templates: templates', t => {
   }
 
   const html = render(data, templates)
+
+  t.true(normalize(html).indexOf(normalize(`
+    <title>Hello</title>
+  `)) !== -1)
 
   t.true(normalize(html).indexOf(normalize(`
     <div class='styleguide-menu'>

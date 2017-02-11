@@ -58,8 +58,8 @@
     "url": "git+ssh://git@github.com/styledown/styledown.git"
   },
   "scripts": {
-    "build": "browserify external.js -t babelify -s Styledown > dist/styledown-external.js",
-    "build:min": "browserify external.js -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
+    "build": "browserify bare.js -t babelify -s Styledown > dist/styledown-external.js",
+    "build:min": "browserify bare.js -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
     "test": "ava"
   },
   "babel": {

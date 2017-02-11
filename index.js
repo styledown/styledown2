@@ -1,5 +1,3 @@
-exports.parse = require('./lib/parse')
+require('babel-register')
+Object.assign(exports, require('./external'))
 exports.parseFiles = require('./lib/parse_files')
-exports.build = require('./lib/build')
-exports.render = require('./lib/render')
-exports.templates = require('./lib/templates')

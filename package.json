@@ -15,6 +15,7 @@
     "babel-register": "6.22.0",
     "babelify": "7.2.0",
     "classnames": "2.2.5",
+    "hogan.js": "3.0.2",
     "js-yaml": "3.6.0",
     "jstransformer-ejs": "^0.0.3",
     "jstransformer-jade": "^0.1.0",
@@ -75,6 +76,8 @@
     ]
   },
   "ava": {
-    "require": ["babel-register"]
+    "require": [
+      "babel-register"
+    ]
   }
 }

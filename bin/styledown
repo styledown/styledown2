@@ -7,43 +7,43 @@ const fs = require('fs')
 const path = require('path')
 const styledown = require('../index')
 const write = require('../lib/cli/write')
+const dedent = require('dedent'
 
 /*
  * CLI/Minimist
  */
 
-var cli = require('meow')([
-  'Usage:',
-  '  $ styledown FILES...',
-  '',
-  'Output formats:',
-  '  -H, --html              output rendered HTML',
-  '      --data              output raw data (default)',
-  '      --templates         output templates',
-  '',
-  'Output formats: (only for --data and --templates)',
-  '      --json              parse into JSON data (default)',
-  '      --yaml              parse into YAML data',
-  '',
-  'Rendering options:',
-  '  -o, --output DIR        render output HTML to DIR (implies --html)',
-  '',
-  'Other options:',
-  '  -h, --help              show usage information',
-  '  -v, --version           print version info and exit',
-  '',
-  'To be deprecated:',
-  '  -t, --transform LANG    transpiles examples of given LANG (comma-separated)',
-  '  -l, --layout FILE       uses FILE as an HTML layout',
-  '',
-  'Examples:',
-  '',
-  '  styledown styles.md > styles.json         # parse to json',
-  '  styledown styles.md --html > styles.html  # render to html',
-  '  styledown *.md -o outdir                  # render to html (multiple)',
-  '',
-  "  styledown *.md -t jade    # transpiles 'example.jade' sections"
-].join('\n'), {
+var cli = require('meow')(dedent `
+  Usage:
+    $ styledown FILES...
+
+  Output formats:
+    -H, --html              output rendered HTML (default)
+        --data              output raw data
+
+  Data output options: (only for --data)
+        --json              parse into JSON data (default)
+        --yaml              parse into YAML data
+
+  HTML output options: (only for --html)
+    -o, --output DIR        render output HTML to DIR
+
+  Other options:
+    -h, --help              show usage information
+    -v, --version           print version info and exit
+
+  To be deprecated:
+    -t, --transform LANG    transpiles examples of given LANG (comma-separated)
+    -l, --layout FILE       uses FILE as an HTML layout
+
+  Examples:
+
+    styledown styles.md > styles.json         # parse to json
+    styledown styles.md --html > styles.html  # render to html
+    styledown *.md -o outdir                  # render to html (multiple)
+
+    styledown *.md -t jade    # transpiles 'example.jade' sections
+`, {
   boolean: ['help', 'version', 'yaml', 'json', 'html'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {

@@ -21,6 +21,8 @@ test('render/templates: templates', t => {
 
   const html = render(data, templates)
 
+  console.log(html)
+
   t.true(normalize(html).indexOf(normalize(`
     <title>Hello</title>
   `)) !== -1)

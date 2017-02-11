@@ -14,6 +14,7 @@
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "6.22.0",
     "classnames": "2.2.5",
+    "dedent": "0.7.0",
     "hogan.js": "3.0.2",
     "js-yaml": "3.6.0",
     "jstransformer-ejs": "^0.0.3",

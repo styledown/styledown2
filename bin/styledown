@@ -7,7 +7,7 @@ const fs = require('fs')
 const path = require('path')
 const styledown = require('../index')
 const write = require('../lib/cli/write')
-const dedent = require('dedent'
+const dedent = require('dedent')
 
 /*
  * CLI/Minimist

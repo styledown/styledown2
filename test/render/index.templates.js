@@ -1,5 +1,5 @@
 var test = require('ava')
-var render = require('../../lib/render')
+var render = require('../../lib/render/render_templates')
 var templates = require('../../lib/templates')
 var normalize = require('../../support/normalize')
 

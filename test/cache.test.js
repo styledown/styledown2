@@ -1,16 +1,16 @@
 const test = require('ava')
-const cache = require('../lib/cache')
+const fetch = require('../lib/cache').fetch
 
 test('fetch() is defined', t => {
-  t.is(typeof cache.fetch, 'function')
+  t.is(typeof fetch, 'function')
 })
 
 test('fetch() works', t => {
   let i = 0
-  cache.fetch(['testkey'], () => ++i)
-  cache.fetch(['testkey'], () => ++i)
+  fetch(['testkey'], () => ++i)
+  fetch(['testkey'], () => ++i)
 
-  const result = cache.fetch(['testkey'], () => ++i)
+  const result = fetch(['testkey'], () => ++i)
 
   t.is(result, 1)
 })

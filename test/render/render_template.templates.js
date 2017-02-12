@@ -1,9 +1,9 @@
 var test = require('ava')
-var render = require('../../lib/render/render_templates')
+var render = require('../../lib/render/render_template')
 var templates = require('../../lib/templates')
 var normalize = require('../../support/normalize')
 
-test('render/templates: templates', t => {
+test('renders templates', t => {
   const data = {
     title: 'Hello',
     sections: [

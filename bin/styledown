@@ -93,7 +93,7 @@ function run () {
   let output
   switch (cli.flags.mode) {
     case 'html':
-      const files = renderAll(data, opts.render)
+      const files = styeldown.render(data, opts.render)
       write(files, cli.flags.output || '-')
       break
 
@@ -105,22 +105,6 @@ function run () {
     default:
       console.warn('!! not implemented')
   }
-}
-
-/*
- * Render many files
- * TODO new render api
- */
-
-function renderAll (data, options) {
-  templates = styledown.build(data)
-
-  return reduce(templates.files, (result, file, fname) => {
-    result[fname] = {
-      contents: styledown.render(templates, fname, options)
-    }
-    return result
-  }, {})
 }
 
 /*

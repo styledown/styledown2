@@ -1,13 +1,13 @@
 var test = require('ava')
-var render = require('../../lib/render/render_templates')
+var render = require('../../lib/render/render_template')
 var r = require('redent')
 
-test('render: variables', t => {
+test('variables', t => {
   const html = render({ name: 'world' }, { html: 'hello {{name}}' })
   t.deepEqual(html, 'hello world')
 })
 
-test('render: partials', t => {
+test('partials', t => {
   const html = render({ name: 'world' }, {
     html: '<div>{{> msg}}</div>',
     msg: 'hello {{name}}'
@@ -15,7 +15,7 @@ test('render: partials', t => {
   t.deepEqual(html, '<div>hello world</div>')
 })
 
-test('render: recursive partials', t => {
+test('recursive partials', t => {
   const html = render({ user: { name: 'world' } }, {
     html: '<div>{{> msg}}</div>',
     msg: '{{#user}}{{> greeting}}{{/user}}',

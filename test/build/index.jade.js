@@ -13,10 +13,10 @@ const CONTENTS = dedent `
 
 test('transforming jade', t => {
   var out = build({
-    'components.md': { contents: CONTENTS }
+    'components.html': { contents: CONTENTS }
   }, { transform: ['jade'] })
 
-  var example = out.files['components.md'].sections.header.parts.s2
+  var example = out.files['components.html'].sections.header.parts.s2
   t.true(example.language === 'html')
   t.true(example.content === '<div class="hello">world</div>')
   t.true(example.source === '.hello world')
@@ -24,10 +24,10 @@ test('transforming jade', t => {
 
 test('dont transform if not specified', t => {
   var out = build({
-    'components.md': { contents: CONTENTS }
+    'components.html': { contents: CONTENTS }
   })
 
-  var example = out.files['components.md'].sections.header.parts.s2
+  var example = out.files['components.html'].sections.header.parts.s2
   t.true(example.language === 'jade')
   t.true(example.content === '.hello world')
 })

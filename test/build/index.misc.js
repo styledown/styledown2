@@ -14,7 +14,7 @@ test('block with code and class', t => {
         ~~~`
     }
   })
-  var header = out.files['components.md'].sections.header
+  var header = out.files['components.html'].sections.header
   t.true(header.parts.s1.type === 'text')
   t.true(header.parts.s1.content === '<p>This is a header</p>')
   t.true(header.parts.s2.type === 'example')
@@ -33,7 +33,7 @@ test('slugifying', t => {
     }
   })
 
-  t.true('shared-header-top' in out.files['components.md'].sections)
+  t.true('shared-header-top' in out.files['components.html'].sections)
   t.pass()
 })
 
@@ -50,18 +50,18 @@ test('multiple blocks', t => {
     }
   })
 
-  // console.log(require('util').inspect(out, { depth: null }))
-  t.true(out.files['components.md'].title === 'Components')
-  t.true(out.files['components.md'].sections.header.title === 'header')
-  t.true(out.files['components.md'].sections.header.depth === 3)
-  t.true(out.files['components.md'].sections.header.parts.s1.id === 's1')
-  t.true(out.files['components.md'].sections.header.parts.s1.type === 'text')
-  t.regex(out.files['components.md'].sections.header.parts.s1.content, /This is a header/)
+  const file = out.files['components.html']
+  t.true(file.title === 'Components')
+  t.true(file.sections.header.title === 'header')
+  t.true(file.sections.header.depth === 3)
+  t.true(file.sections.header.parts.s1.id === 's1')
+  t.true(file.sections.header.parts.s1.type === 'text')
+  t.regex(file.sections.header.parts.s1.content, /This is a header/)
 
-  t.true(out.files['components.md'].sections.footer.title === 'footer')
-  t.true(out.files['components.md'].sections.footer.depth === 3)
-  t.true(out.files['components.md'].sections.footer.parts.s1.id === 's1')
-  t.true(out.files['components.md'].sections.footer.parts.s1.type === 'text')
-  t.regex(out.files['components.md'].sections.footer.parts.s1.content, /This is a footer/)
+  t.true(file.sections.footer.title === 'footer')
+  t.true(file.sections.footer.depth === 3)
+  t.true(file.sections.footer.parts.s1.id === 's1')
+  t.true(file.sections.footer.parts.s1.type === 'text')
+  t.regex(file.sections.footer.parts.s1.content, /This is a footer/)
   t.pass()
 })

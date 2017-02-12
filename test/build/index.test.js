@@ -18,7 +18,7 @@ const FILES = {
 test('block with example', t => {
   const result = build(FILES)
 
-  var file = result.files['components.md']
+  var file = result.files['components.html']
   t.true(file.title === 'Components')
 
   var header = file.sections.header

@@ -69,7 +69,7 @@ if (typeof cli.flags.transform === 'string') {
 cli.flags.mode =
   cli.flags.html ? 'html' :
   cli.flags.data ? 'data' :
-  'html'
+  null
 
 /*
  * Options to send to styledown.parse() and styledown.render()

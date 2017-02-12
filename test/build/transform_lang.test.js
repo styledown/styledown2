@@ -1,7 +1,7 @@
 const test = require('ava')
 const transformLang = require('../../lib/build/transform_lang')
 
-test('transformLang: works', t => {
+test('works', t => {
   const result = transformLang({
     sections: [
       { parts: [
@@ -16,7 +16,7 @@ test('transformLang: works', t => {
   t.is(result.sections[0].parts[0].content, '<a class="btn">Hello</a>')
 })
 
-test('transformLang: leaves others alone', t => {
+test('leaves others alone', t => {
   const result = transformLang({
     sections: [
       { parts: [
@@ -30,7 +30,7 @@ test('transformLang: leaves others alone', t => {
   t.is(result.sections[0].parts[0].content, '%a.btn Hello')
 })
 
-test('transformLang: works with pug', t => {
+test('works with pug', t => {
   const result = transformLang({
     sections: [
       { parts: [

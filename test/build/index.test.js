@@ -2,7 +2,7 @@ const test = require('ava')
 const build = require('../../lib/build')
 const dedent = require('dedent')
 
-test('build: block with example', t => {
+test('block with example', t => {
   var out = build({
     'components.md': {
       contents: dedent `

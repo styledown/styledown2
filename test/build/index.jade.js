@@ -11,7 +11,7 @@ const CONTENTS = dedent `
   .hello world
   ~~~`
 
-test('build: transforming jade', t => {
+test('transforming jade', t => {
   var out = build({
     'components.md': { contents: CONTENTS }
   }, { transform: ['jade'] })
@@ -22,7 +22,7 @@ test('build: transforming jade', t => {
   t.true(example.source === '.hello world')
 })
 
-test('build: dont transform if not specified', t => {
+test('dont transform if not specified', t => {
   var out = build({
     'components.md': { contents: CONTENTS }
   })

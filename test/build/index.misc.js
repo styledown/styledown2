@@ -2,7 +2,7 @@ const test = require('ava')
 const build = require('../../lib/build')
 const dedent = require('dedent')
 
-test('build: block with code and class', t => {
+test('block with code and class', t => {
   var out = build({
     'components.md': {
       contents: dedent `
@@ -23,7 +23,7 @@ test('build: block with code and class', t => {
   t.regex(header.parts.s2.content, /= render 'header'/)
 })
 
-test('build: slugifying', t => {
+test('slugifying', t => {
   var out = build({
     'components.md': {
       contents: dedent `
@@ -37,7 +37,7 @@ test('build: slugifying', t => {
   t.pass()
 })
 
-test('build: multiple blocks', t => {
+test('multiple blocks', t => {
   var out = build({
     'components.md': {
       contents: dedent `

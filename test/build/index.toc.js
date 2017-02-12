@@ -3,7 +3,7 @@ const build = require('../../lib/build')
 const dedent = require('dedent')
 const tocify = require('../../lib/tocify')
 
-test('build: generates toc', t => {
+test('generates toc', t => {
   var output = build({
     'README.md': {
       contents: dedent `
@@ -29,7 +29,7 @@ test('build: generates toc', t => {
   t.deepEqual(output.toc, expected.toc)
 })
 
-test('build: tocify()', t => {
+test('tocify()', t => {
   var output = tocify(dedent `
     # Table of Contents
 

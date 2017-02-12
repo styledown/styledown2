@@ -1,48 +1,50 @@
 #!/usr/bin/env node
 const meow = require('meow')
 const reduce = require('object-loops/reduce')
-const read = require('read-input')
 const fs = require('fs')
 const path = require('path')
 const styledown = require('../index')
 const write = require('../lib/cli/write')
-const dedent = require('dedent')
+
+/*
+ * Help text
+ */
+
+const HELP =
+`Usage:
+  $ styledown FILES...
+
+Output formats:
+  -H, --html              output rendered HTML (default)
+      --data              output raw data
+
+Data output options: (implies --data)
+      --json              parse into JSON data (default)
+      --yaml              parse into YAML data
+
+HTML output options: (implies --html)
+  -o, --output DIR        render output HTML to DIR
+
+Other options:
+  -h, --help              show usage information
+  -v, --version           print version info and exit
+
+To be deprecated:
+  -t, --transform LANG    transpiles examples of given LANG (comma-separated)
+
+Examples:
+
+  styledown styles.md > styles.json         # parse to json
+  styledown styles.md --html > styles.html  # render to html
+  styledown *.md -o outdir                  # render to html (multiple)
+
+  styledown *.md -t jade    # transpiles 'example.jade' sections`
 
 /*
  * CLI/Minimist
  */
 
-var cli = require('meow')(dedent `
-  Usage:
-    $ styledown FILES...
-
-  Output formats:
-    -H, --html              output rendered HTML (default)
-        --data              output raw data
-
-  Data output options: (implies --data)
-        --json              parse into JSON data (default)
-        --yaml              parse into YAML data
-
-  HTML output options: (implies --html)
-    -o, --output DIR        render output HTML to DIR
-
-  Other options:
-    -h, --help              show usage information
-    -v, --version           print version info and exit
-
-  To be deprecated:
-    -t, --transform LANG    transpiles examples of given LANG (comma-separated)
-    -l, --layout FILE       uses FILE as an HTML layout
-
-  Examples:
-
-    styledown styles.md > styles.json         # parse to json
-    styledown styles.md --html > styles.html  # render to html
-    styledown *.md -o outdir                  # render to html (multiple)
-
-    styledown *.md -t jade    # transpiles 'example.jade' sections
-`, {
+var cli = require('meow')(help, {
   boolean: ['help', 'version', 'yaml', 'json', 'html'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {
@@ -57,6 +59,7 @@ var cli = require('meow')(dedent `
  */
 
 if (cli.flags.output) cli.flags.html = true
+if (cli.flags.json || cli.flags.yaml) cli.flags.data = true
 
 if (typeof cli.flags.transform === 'string') {
   cli.flags.transform = cli.flags.transform.split(',')
@@ -65,20 +68,15 @@ if (typeof cli.flags.transform === 'string') {
 cli.flags.mode =
   cli.flags.html ? 'html' :
   cli.flags.data ? 'data' :
-  cli.flags.templates ? 'templates' :
-  'data'
+  'html'
 
 /*
  * Options to send to styledown.parse() and styledown.render()
  */
 
 var opts = {
-  parse: {
+  build: {
     transform: cli.flags.transform
-  },
-  render: {
-    layout: cli.flags.layout && fs.readFileSync(cli.flags.layout, 'utf-8'),
-    layoutEngine: cli.flags.layout && getExtension(cli.flags.layout)
   }
 }
 
@@ -86,13 +84,11 @@ var opts = {
  * Perform
  */
 
-read(cli.input)
-.then(function (res) {
-  res.files.forEach(function (file) {
-    if (file.error) throw file.error
-  })
+run()
 
-  var data = styledown.parse(res.files, opts.parse)
+function run () {
+  const files = styledown.read(cli.input)
+  var data = styledown.build(res.files, opts.build)
 
   let output
   switch (cli.flags.mode) {
@@ -106,19 +102,14 @@ read(cli.input)
       write(output, cli.flags.output || '-')
       break
 
-    case 'templates':
-      const templates = styledown.build(data)
-      output = cli.flags.yaml ? toYaml(templates) : toJson(templates)
-      write(output, cli.flags.output || '-')
-      break
-
     default:
       console.warn('!! not implemented')
   }
-})
+}
 
 /*
  * Render many files
+ * TODO new render api
  */
 
 function renderAll (data, options) {

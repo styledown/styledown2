@@ -1,7 +1,7 @@
 var test = require('ava')
-var render = require('../lib/render')
-var templates = require('../lib/templates')
-var normalize = require('../support/normalize')
+var render = require('../../lib/render')
+var templates = require('../../lib/templates')
+var normalize = require('../../support/normalize')
 
 test('render/templates: templates', t => {
   const data = {

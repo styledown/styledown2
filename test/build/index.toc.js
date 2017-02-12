@@ -1,7 +1,7 @@
 const test = require('ava')
-const build = require('../lib/build')
+const build = require('../../lib/build')
 const dedent = require('dedent')
-const tocify = require('../lib/tocify')
+const tocify = require('../../lib/tocify')
 
 test('build: generates toc', t => {
   var output = build({

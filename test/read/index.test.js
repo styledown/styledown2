@@ -1,5 +1,5 @@
 const test = require('ava')
-const read = require('../lib/read')
+const read = require('../../lib/read')
 
 test('read: works on paths', t => {
   const result = read('./examples/bootstrap')

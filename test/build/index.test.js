@@ -1,5 +1,5 @@
 const test = require('ava')
-const build = require('../lib/build')
+const build = require('../../lib/build')
 const dedent = require('dedent')
 
 test('build: block with example', t => {

@@ -1,5 +1,5 @@
 var test = require('ava')
-var render = require('../lib/render')
+var render = require('../../lib/render')
 var r = require('redent')
 
 test('render: variables', t => {

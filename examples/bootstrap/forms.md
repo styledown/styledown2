@@ -27,7 +27,7 @@ form.form-inline
       input.form-control(placeholder='Email')
   .form-group
     input.form-control(placeholder='Password' type='password')
-   button.btn.btn-default Sign in
+  button.btn.btn-default Sign in
 ```
 
 ### form-horizontal

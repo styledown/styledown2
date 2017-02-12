@@ -18,6 +18,22 @@ test('works', t => {
   t.deepEqual(result['buttons.html'].contents, 'Hello John')
 })
 
+test('accounts for meta', t => {
+  const data = {
+    files: {
+      'buttons.html': { layout: 'html' }
+    },
+    templates: { 'html': 'Hello {{meta.name}}' },
+    meta: { name: 'John' }
+  }
+
+  const result = render(data)
+
+  t.deepEqual(Object.keys(result), ['buttons.html'])
+  t.deepEqual(Object.keys(result['buttons.html']), ['contents'])
+  t.deepEqual(result['buttons.html'].contents, 'Hello John')
+})
+
 test('allows recursive partials', t => {
   const data = {
     files: {

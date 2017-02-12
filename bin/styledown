@@ -44,7 +44,7 @@ Examples:
  * CLI/Minimist
  */
 
-var cli = require('meow')(help, {
+var cli = require('meow')(HELP, {
   boolean: ['help', 'version', 'yaml', 'json', 'html'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {
@@ -77,7 +77,8 @@ cli.flags.mode =
 var opts = {
   build: {
     transform: cli.flags.transform
-  }
+  },
+  render: {}
 }
 
 /*
@@ -88,12 +89,12 @@ run()
 
 function run () {
   const files = styledown.read(cli.input)
-  var data = styledown.build(res.files, opts.build)
+  var data = styledown.build(files, opts.build)
 
   let output
   switch (cli.flags.mode) {
     case 'html':
-      const files = styeldown.render(data, opts.render)
+      const files = styledown.render(data, opts.render)
       write(files, cli.flags.output || '-')
       break
 

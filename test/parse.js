@@ -1,20 +1,20 @@
-var test = require('ava')
-var styledown = require('../index')
-var r = require('redent')
+const test = require('ava')
+const parse = require('../lib/parse')
+const dedent = require('dedent')
 
 test('block with example', t => {
-  var out = styledown.parse([
-    { name: 'components.md',
-      data: r(`
+  var out = parse({
+    'components.md': {
+      contents: dedent `
         # Components
         ### header
         This is a header
 
         ~~~ example.haml
         = render 'header'
-        ~~~
-      `) }
-  ])
+        ~~~`
+    }
+  })
 
   var file = out.files['components.md']
   t.true(file.title === 'Components')

@@ -1,26 +1,20 @@
-var test = require('ava')
-var styledown = require('../index')
-var r = require('redent')
-var tocify = require('../lib/tocify')
+const test = require('ava')
+const parse = require('../lib/parse')
+const dedent = require('dedent')
+const tocify = require('../lib/tocify')
 
 test('generates toc', t => {
-  var output = styledown.parse([
-    { name: 'README.md',
-      contents: r(`
+  var output = parse({
+    'README.md': {
+      contents: dedent `
         # Table of Contents
 
         * [Buttons](buttons.md)
         * [Panels](panels.md)
-      `) },
-    { name: 'buttons.md',
-      contents: r(`
-        # Buttons
-      `) },
-    { name: 'panels.md',
-      contents: r(`
-        # Panels
-      `) }
-  ])
+      ` },
+    'buttons.md': { contents: '# Buttons' },
+    'panels.md': { contents: '# Panels' }
+  })
 
   var expected =
     { toc:
@@ -36,13 +30,13 @@ test('generates toc', t => {
 })
 
 test('loltoc', t => {
-  var output = tocify(r(`
+  var output = tocify(dedent `
     # Table of Contents
 
     * [Home](index.md)
     * Document
       * [Index](index.md)
-  `))
+  `)
 
   var expected =
     { sections:

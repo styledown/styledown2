@@ -1,20 +1,20 @@
-var test = require('ava')
-var styledown = require('../index')
-var r = require('redent')
+const test = require('ava')
+const parse = require('../lib/parse')
+const dedent = require('dedent')
+
+const CONTENTS = dedent `
+  # Components
+  ### header
+  This is a header
+
+  ~~~ example.jade
+  .hello world
+  ~~~`
 
 test('transforming jade', t => {
-  var out = styledown.parse([
-    { name: 'components.md',
-      data: r(`
-        # Components
-        ### header
-        This is a header
-
-        ~~~ example.jade
-        .hello world
-        ~~~
-      `) }
-  ], { transform: ['jade'] })
+  var out = parse({
+    'components.md': { contents: CONTENTS }
+  }, { transform: ['jade'] })
 
   var example = out.files['components.md'].sections.header.parts.s2
   t.true(example.language === 'html')
@@ -23,18 +23,9 @@ test('transforming jade', t => {
 })
 
 test('dont transform if not specified', t => {
-  var out = styledown.parse([
-    { name: 'components.md',
-      data: r(`
-        # Components
-        ### header
-        This is a header
-
-        ~~~ example.jade
-        .hello world
-        ~~~
-      `) }
-  ])
+  var out = parse({
+    'components.md': { contents: CONTENTS }
+  })
 
   var example = out.files['components.md'].sections.header.parts.s2
   t.true(example.language === 'jade')

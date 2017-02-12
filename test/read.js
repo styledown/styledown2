@@ -10,6 +10,8 @@ test('read: works on paths', t => {
     'components.md',
     'forms.md'
   ])
+
+  t.is(typeof result['README.md'].contents, 'string')
 })
 
 test('read: works on paths', t => {

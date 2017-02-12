@@ -1,10 +1,10 @@
 const test = require('ava')
-const parse = require('../lib/parse')
+const build = require('../lib/build')
 const dedent = require('dedent')
 const tocify = require('../lib/tocify')
 
-test('generates toc', t => {
-  var output = parse({
+test('build: generates toc', t => {
+  var output = build({
     'README.md': {
       contents: dedent `
         # Table of Contents
@@ -29,7 +29,7 @@ test('generates toc', t => {
   t.deepEqual(output.toc, expected.toc)
 })
 
-test('loltoc', t => {
+test('build: tocify()', t => {
   var output = tocify(dedent `
     # Table of Contents
 

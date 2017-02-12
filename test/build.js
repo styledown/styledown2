@@ -1,9 +1,9 @@
 const test = require('ava')
-const parse = require('../lib/parse')
+const build = require('../lib/build')
 const dedent = require('dedent')
 
-test('block with example', t => {
-  var out = parse({
+test('build: block with example', t => {
+  var out = build({
     'components.md': {
       contents: dedent `
         # Components

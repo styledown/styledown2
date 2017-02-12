@@ -1,9 +1,9 @@
 const test = require('ava')
-const parse = require('../lib/parse')
+const build = require('../lib/build')
 const dedent = require('dedent')
 
-test('block with code and class', t => {
-  var out = parse({
+test('build: block with code and class', t => {
+  var out = build({
     'components.md': {
       contents: dedent `
         ### header
@@ -23,8 +23,8 @@ test('block with code and class', t => {
   t.regex(header.parts.s2.content, /= render 'header'/)
 })
 
-test('slugifying', t => {
-  var out = parse({
+test('build: slugifying', t => {
+  var out = build({
     'components.md': {
       contents: dedent `
         ### shared/header (top)
@@ -37,8 +37,8 @@ test('slugifying', t => {
   t.pass()
 })
 
-test('multiple blocks', t => {
-  var out = parse({
+test('build: multiple blocks', t => {
+  var out = build({
     'components.md': {
       contents: dedent `
         # Components

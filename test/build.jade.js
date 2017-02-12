@@ -1,5 +1,5 @@
 const test = require('ava')
-const parse = require('../lib/parse')
+const build = require('../lib/build')
 const dedent = require('dedent')
 
 const CONTENTS = dedent `
@@ -11,8 +11,8 @@ const CONTENTS = dedent `
   .hello world
   ~~~`
 
-test('transforming jade', t => {
-  var out = parse({
+test('build: transforming jade', t => {
+  var out = build({
     'components.md': { contents: CONTENTS }
   }, { transform: ['jade'] })
 
@@ -22,8 +22,8 @@ test('transforming jade', t => {
   t.true(example.source === '.hello world')
 })
 
-test('dont transform if not specified', t => {
-  var out = parse({
+test('build: dont transform if not specified', t => {
+  var out = build({
     'components.md': { contents: CONTENTS }
   })
 

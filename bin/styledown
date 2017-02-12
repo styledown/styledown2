@@ -25,12 +25,13 @@ Data output options: (implies --data)
 HTML output options: (implies --html)
   -o, --output DIR        render output HTML to DIR
 
+Build options:
+      --skip-assets       skip JS/CSS
+  -t, --transform LANG    transpiles examples of given LANG (comma-separated)
+
 Other options:
   -h, --help              show usage information
   -v, --version           print version info and exit
-
-To be deprecated:
-  -t, --transform LANG    transpiles examples of given LANG (comma-separated)
 
 Examples:
 
@@ -45,7 +46,7 @@ Examples:
  */
 
 var cli = require('meow')(HELP, {
-  boolean: ['help', 'version', 'yaml', 'json', 'html'],
+  boolean: ['help', 'version', 'yaml', 'json', 'html', 'skipAssets'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {
     h: 'help', v: 'version',
@@ -76,7 +77,8 @@ cli.flags.mode =
 
 var opts = {
   build: {
-    transform: cli.flags.transform
+    transform: cli.flags.transform,
+    skipAssets: cli.flags.skipAssets
   },
   render: {}
 }

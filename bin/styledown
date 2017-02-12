@@ -66,10 +66,7 @@ if (typeof cli.flags.transform === 'string') {
   cli.flags.transform = cli.flags.transform.split(',')
 }
 
-cli.flags.mode =
-  cli.flags.html ? 'html' :
-  cli.flags.data ? 'data' :
-  null
+cli.flags.mode = cli.flags.data ? 'data' : 'html'
 
 /*
  * Options to send to styledown.parse() and styledown.render()

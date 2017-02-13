@@ -20,11 +20,11 @@ test('generates toc', t => {
     { toc:
        { sections:
           [ { title: 'Buttons',
-              href: 'buttons.md',
+              href: 'buttons.html',
               depth: 1,
               isParent: false },
             { title: 'Panels',
-              href: 'panels.md',
+              href: 'panels.html',
               depth: 1,
               isParent: false } ],
          depth: 0,
@@ -45,13 +45,13 @@ test('tocify()', t => {
   var expected =
     { sections:
        [ { title: 'Home',
-           href: 'index.md',
+           href: 'index.html',
            isParent: false,
            depth: 1 },
          { title: 'Document',
            sections:
             [ { title: 'Index',
-                href: 'index.md',
+                href: 'index.html',
                 isParent: false,
                 depth: 2 } ],
            isParent: true,
@@ -60,4 +60,26 @@ test('tocify()', t => {
       isParent: true }
 
   t.deepEqual(output, expected)
+})
+
+test('anchors', t => {
+  var output = build({
+    'README.md': {
+      contents: '* [Buttons](buttons.md#lol)'
+    }
+  })
+
+  const section = output.toc.sections[0]
+  t.deepEqual(section.href, 'buttons.html#lol')
+})
+
+test('custom extensions', t => {
+  var output = build({
+    'README.md': {
+      contents: '* [Buttons](buttons.md#lol)'
+    }
+  }, { extension: '.htm' })
+
+  const section = output.toc.sections[0]
+  t.deepEqual(section.href, 'buttons.htm#lol')
 })

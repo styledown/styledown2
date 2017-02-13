@@ -9,7 +9,8 @@ test('read: works on paths', t => {
     'buttons.md',
     'components.md',
     'forms.md',
-    'templates/head.html'
+    'templates/head.html',
+    'templates/title.html'
   ])
 
   t.is(typeof result['README.md'].contents, 'string')

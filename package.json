@@ -8,10 +8,8 @@
   },
   "dependencies": {
     "any-promise": "1.1.0",
-    "babel-plugin-transform-react-jsx": "6.22.0",
     "babel-preset-es2015": "6.6.0",
     "babel-preset-stage-0": "6.5.0",
-    "babel-register": "6.22.0",
     "classnames": "2.2.5",
     "hogan.js": "3.0.2",
     "js-yaml": "3.6.0",
@@ -87,19 +85,6 @@
     "presets": [
       "es2015",
       "stage-0"
-    ],
-    "plugins": [
-      [
-        "transform-react-jsx",
-        {
-          "pragma": "h"
-        }
-      ]
-    ]
-  },
-  "ava": {
-    "require": [
-      "babel-register"
     ]
   }
 }

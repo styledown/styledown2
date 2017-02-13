@@ -1,6 +1,6 @@
 styledown := ../../bin/styledown
 
-all: html html.nolayout
+all: html
 
 html:
 	${styledown} *.md -t jade -o html

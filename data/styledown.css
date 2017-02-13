@@ -1,3 +1,13 @@
+.styleguide-text,
+.styleguide-section,
+.styleguide-code,
+.styleguide-example,
+.styleguide-sidebar,
+.styleguide-body,
+.styleguide-menu {
+  box-sizing: border-box;
+}
+
 /*
  * Sections
  *

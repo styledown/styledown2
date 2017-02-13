@@ -64,6 +64,7 @@ data = styledown.build(files)
     'html':
       `<!doctype html>
       <html>
+        <title>{{title}}</title>
         {{> sidebar}}
         {{> body}}
       </html>`,
@@ -72,7 +73,7 @@ data = styledown.build(files)
        `<div class='styleguide-menu'>...</div>`,
 
      'body':
-       `<div class='styleguide-body'>...</div>`,
+       `<div class='styleguide-body'>{{#sections}}...{{/sections}}</div>`,
   },
 
   meta: {
@@ -88,8 +89,10 @@ data = styledown.build(files)
 
 ```js
 output = styledown.render(data)
-// => { 'buttons.html', 'forms.html',
-//      'styledown/script.js', 'styledown.style.js' }
+// => { 'buttons.html',
+//      'forms.html',
+//      'styledown/script.js',
+//      'styledown.style.js' }
 ```
 
 <details>
@@ -99,16 +102,20 @@ output = styledown.render(data)
 /* Result: */
 {
   'buttons.html': {
-    contents: '<!doctype html>...</html>'
+    contents: '<!doctype html>...</html>',
+    type: 'text/html'
   },
   'forms.html': {
-    contents: '<!doctype html>...</html>'
+    contents: '<!doctype html>...</html>',
+    type: 'text/html'
   },
   'styledown/script.js': {
-    contents: '...'
+    contents: '...',
+    type: 'application/javascript'
   },
   'styledown/style.js': {
-    contents: '...'
+    contents: '...',
+    type: 'text/css'
   }
 }
 ```

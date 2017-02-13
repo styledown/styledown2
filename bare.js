@@ -8,6 +8,8 @@
  * This is used by the Ruby gem (styledown2-source).
  */
 
+require('babel-polyfill')
+
 exports.cache = require('./lib/cache')
 exports.render = require('./lib/render')
 exports.build = require('./lib/build')

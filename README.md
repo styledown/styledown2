@@ -4,7 +4,7 @@
 
 > Write maintainable CSS styleguides using Markdown
 
-[![Status](https://travis-ci.org/styledown/styledown.svg?branch=v2)](https://travis-ci.org/styledown/styledown "See test builds")
+[![Status](https://travis-ci.org/styledown/styledown2.svg?branch=v2)](https://travis-ci.org/styledown/styledown2 "See test builds")
 
 <br>
 

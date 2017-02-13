@@ -74,8 +74,6 @@
     "assets:watch": "run-p assets:watch:css assets:watch:js",
     "assets:watch:css": "nodemon -C --exec \"run-s assets:build:css\" --ext \"css\" --watch assets --quiet",
     "assets:watch:js": "nodemon -C --exec \"run-s assets:build:js\" --ext \"js\" --watch assets --quiet",
-    "dist": "browserify bare.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",
-    "dist:min": "browserify bare.js -t brfs -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
     "example": "run-s assets:build example:post",
     "example:post": "run-p -l example:watch example:serve assets:watch",
     "example:build": "cd examples/bootstrap && make",

@@ -349,3 +349,21 @@
   pointer-events: auto;
   opacity: .1;
 }
+
+/*
+ * Body
+ */
+
+.styleguide-body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (max-width: 480px) {
+  .styleguide-body {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

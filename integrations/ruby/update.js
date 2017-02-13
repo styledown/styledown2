@@ -17,7 +17,8 @@ class Styledown
   module Source
     VERSION = '${VERSION}'
   end
-end`
+end
+`
 
 const SOURCE_FILE =
 `# encoding: utf-8
@@ -27,7 +28,15 @@ class Styledown
 ${SOURCE}
 STYLEDOWN_END
   end
-end`
+end
+`
+
+const ALIAS_FILE =
+`# encoding: utf-8
+require 'styledown/source'
+`
 
 writeFileSync('lib/styledown/source/version.rb', VERSION_FILE, 'utf-8')
 writeFileSync('lib/styledown/source.rb', SOURCE_FILE, 'utf-8')
+writeFileSync('lib/styledown2-source.rb', ALIAS_FILE, 'utf-8')
+writeFileSync('lib/styledown-source.rb', ALIAS_FILE, 'utf-8')

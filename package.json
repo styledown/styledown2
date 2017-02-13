@@ -40,7 +40,10 @@
     "docpress": "0.6.11",
     "git-update-ghpages": "1.3.0",
     "jsdom": "9.10.0",
+    "nodemon": "1.11.0",
+    "npm-run-all": "4.0.1",
     "redent": "2.0.0",
+    "serve": "3.3.0",
     "uglify-js": "2.6.2"
   },
   "files": [
@@ -63,6 +66,10 @@
   "scripts": {
     "build": "browserify bare.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",
     "build:min": "browserify bare.js -t brfs -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
+    "example": "run-p example:watch example:serve",
+    "example:build": "cd examples/bootstrap && make",
+    "example:watch": "cd examples/bootstrap && nodemon --exec make -e md -q",
+    "example:serve": "cd examples/bootstrap/html && serve",
     "test": "ava"
   },
   "babel": {

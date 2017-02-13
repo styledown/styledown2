@@ -64,12 +64,18 @@
     "url": "git+ssh://git@github.com/styledown/styledown.git"
   },
   "scripts": {
-    "build": "browserify bare.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",
-    "build:min": "browserify bare.js -t brfs -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
-    "example": "run-p example:watch example:serve",
+    "assets:build": "run-p assets:build:js assets:build:css",
+    "assets:build:css": "cp assets/style.css dist/style.css",
+    "assets:build:js": "browserify -t babelify assets/script.js | uglifyjs -c warnings=false -m > dist/script.js",
+    "assets:watch:css": "nodemon --exec \"run-s assets:build:css\" --ext \"css\" --watch assets --quiet",
+    "assets:watch:js": "nodemon --exec \"run-s assets:build:js\" --ext \"js\" --watch assets --quiet",
+    "dist": "browserify bare.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",
+    "dist:min": "browserify bare.js -t brfs -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
+    "example": "run-p -l example:watch example:serve assets:watch:css assets:watch:js",
     "example:build": "cd examples/bootstrap && make",
-    "example:watch": "cd examples/bootstrap && nodemon --exec make -e md -q",
     "example:serve": "cd examples/bootstrap/html && serve",
+    "example:watch": "cd examples/bootstrap && nodemon --exec make --ext \"md\" --quiet",
+    "prepublish": "run-s assets-build",
     "test": "ava"
   },
   "babel": {

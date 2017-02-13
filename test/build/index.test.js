@@ -40,6 +40,14 @@ test('block with example', t => {
   t.regex(header.parts[1].content, /= render 'header'/)
 })
 
+test('blank extensions', t => {
+  const result = build(FILES, { extension: '' })
+  let header
+
+  const file = result.files['components']
+  t.true(file.title === 'Components')
+})
+
 test('renders assets', t => {
   const result = build(FILES)
 

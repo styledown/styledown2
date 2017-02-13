@@ -83,3 +83,14 @@ test('custom extensions', t => {
   const section = output.toc.sections[0]
   t.deepEqual(section.href, 'buttons.htm#lol')
 })
+
+test('blank extensions', t => {
+  var output = build({
+    'README.md': {
+      contents: '* [Buttons](buttons.md#lol)'
+    }
+  }, { extension: '' })
+
+  const section = output.toc.sections[0]
+  t.deepEqual(section.href, 'buttons#lol')
+})

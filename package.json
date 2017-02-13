@@ -49,9 +49,10 @@
     "uglify-js": "2.6.2"
   },
   "files": [
-    "lib",
-    "data",
-    "bin"
+    "assets",
+    "bin",
+    "cache",
+    "lib"
   ],
   "homepage": "https://github.com/styledown/styledown#readme",
   "keywords": [
@@ -86,5 +87,8 @@
       "es2015",
       "stage-0"
     ]
+  },
+  "engines": {
+    "node": ">= 6"
   }
 }

@@ -12,7 +12,7 @@ const SOURCE = readFileSync(
   resolve(__dirname, '../../dist/styledown-external.js'), 'utf-8')
 
 const VERSION_FILE =
-`# coding: utf-8
+`# encoding: utf-8
 class Styledown
   module Source
     VERSION = '${VERSION}'
@@ -20,15 +20,14 @@ class Styledown
 end`
 
 const SOURCE_FILE =
-`# coding: utf-8
+`# encoding: utf-8
 class Styledown
   module Source
     SOURCE = <<-'STYLEDOWN_END'
 ${SOURCE}
 STYLEDOWN_END
   end
-end
-${SOURCE.replace(/'/g, "\\'")}`
+end`
 
 writeFileSync('lib/styledown/source/version.rb', VERSION_FILE, 'utf-8')
 writeFileSync('lib/styledown/source.rb', SOURCE_FILE, 'utf-8')

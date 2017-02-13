@@ -30,7 +30,7 @@ rubygem: \
 # Pushes the ruby gem to rubygems.org
 #
 
-rubygem-push: gem
+rubygem-push: rubygem
 	@echo "==> pushing gem"
 	@cd integrations/ruby && gem push *.gem
 

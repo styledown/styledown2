@@ -14,13 +14,13 @@ test('block with code and class', t => {
         ~~~`
     }
   })
-  var header = out.files['components.html'].sections.header
-  t.true(header.parts.s1.type === 'text')
-  t.true(header.parts.s1.content === '<p>This is a header</p>')
-  t.true(header.parts.s2.type === 'example')
-  t.true(header.parts.s2.language === 'haml')
-  t.true(header.parts.s2.class === 'a b')
-  t.regex(header.parts.s2.content, /= render 'header'/)
+  var header = out.files['components.html'].sections[0]
+  t.true(header.parts[0].type === 'text')
+  t.true(header.parts[0].content === '<p>This is a header</p>')
+  t.true(header.parts[1].type === 'example')
+  t.true(header.parts[1].language === 'haml')
+  t.true(header.parts[1].class === 'a b')
+  t.regex(header.parts[1].content, /= render 'header'/)
 })
 
 test('slugifying', t => {
@@ -33,12 +33,14 @@ test('slugifying', t => {
     }
   })
 
-  t.true('shared-header-top' in out.files['components.html'].sections)
+  t.true(out.files['components.html'].sections[0].id === 'shared-header-top')
   t.pass()
 })
 
 test('multiple blocks', t => {
-  var out = build({
+  let section, part
+
+  const out = build({
     'components.md': {
       contents: dedent `
         # Components
@@ -52,16 +54,22 @@ test('multiple blocks', t => {
 
   const file = out.files['components.html']
   t.true(file.title === 'Components')
-  t.true(file.sections.header.title === 'header')
-  t.true(file.sections.header.depth === 3)
-  t.true(file.sections.header.parts.s1.id === 's1')
-  t.true(file.sections.header.parts.s1.type === 'text')
-  t.regex(file.sections.header.parts.s1.content, /This is a header/)
 
-  t.true(file.sections.footer.title === 'footer')
-  t.true(file.sections.footer.depth === 3)
-  t.true(file.sections.footer.parts.s1.id === 's1')
-  t.true(file.sections.footer.parts.s1.type === 'text')
-  t.regex(file.sections.footer.parts.s1.content, /This is a footer/)
-  t.pass()
+  section = file.sections[1]
+  t.true(section.title === 'header')
+  t.true(section.depth === 3)
+
+  part = section.parts[0]
+  t.true(part.id === 'header-1')
+  t.true(part.type === 'text')
+  t.regex(part.content, /This is a header/)
+
+  section = file.sections[2]
+  t.true(section.title === 'footer')
+  t.true(section.depth === 3)
+
+  part = section.parts[0]
+  t.true(part.id === 'footer-1')
+  t.true(part.type === 'text')
+  t.regex(part.content, /This is a footer/)
 })

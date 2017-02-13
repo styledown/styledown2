@@ -40,7 +40,6 @@ test('block with example', t => {
   t.regex(header.parts[1].content, /= render 'header'/)
 })
 
-
 test('renders assets', t => {
   const result = build(FILES)
 

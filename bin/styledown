@@ -1,50 +1,52 @@
 #!/usr/bin/env node
-require('babel-register')
 const meow = require('meow')
 const reduce = require('object-loops/reduce')
-const read = require('read-input')
 const fs = require('fs')
 const path = require('path')
 const styledown = require('../index')
 const write = require('../lib/cli/write')
 
 /*
+ * Help text
+ */
+
+const HELP =
+`Usage:
+  $ styledown FILES...
+
+Output formats:
+  -H, --html              output rendered HTML (default)
+      --data              output raw data
+
+Data output options: (implies --data)
+      --json              parse into JSON data (default)
+      --yaml              parse into YAML data
+
+HTML output options: (implies --html)
+  -o, --output DIR        render output HTML to DIR
+
+Build options:
+      --skip-assets       skip JS/CSS
+  -t, --transform LANG    transpiles examples of given LANG (comma-separated)
+
+Other options:
+  -h, --help              show usage information
+  -v, --version           print version info and exit
+
+Examples:
+
+  styledown styles.md > styles.json         # parse to json
+  styledown styles.md --html > styles.html  # render to html
+  styledown *.md -o outdir                  # render to html (multiple)
+
+  styledown *.md -t jade    # transpiles 'example.jade' sections`
+
+/*
  * CLI/Minimist
  */
 
-var cli = require('meow')([
-  'Usage:',
-  '  $ styledown FILES...',
-  '',
-  'Output formats:',
-  '  -H, --html              output rendered HTML',
-  '      --data              output raw data (default)',
-  '      --templates         output templates',
-  '',
-  'Output formats: (only for --data and --templates)',
-  '      --json              parse into JSON data (default)',
-  '      --yaml              parse into YAML data',
-  '',
-  'Rendering options:',
-  '  -o, --output DIR        render output HTML to DIR (implies --html)',
-  '',
-  'Other options:',
-  '  -h, --help              show usage information',
-  '  -v, --version           print version info and exit',
-  '',
-  'To be deprecated:',
-  '  -t, --transform LANG    transpiles examples of given LANG (comma-separated)',
-  '  -l, --layout FILE       uses FILE as an HTML layout',
-  '',
-  'Examples:',
-  '',
-  '  styledown styles.md > styles.json         # parse to json',
-  '  styledown styles.md --html > styles.html  # render to html',
-  '  styledown *.md -o outdir                  # render to html (multiple)',
-  '',
-  "  styledown *.md -t jade    # transpiles 'example.jade' sections"
-].join('\n'), {
-  boolean: ['help', 'version', 'yaml', 'json', 'html'],
+var cli = require('meow')(HELP, {
+  boolean: ['help', 'version', 'yaml', 'json', 'html', 'skipAssets'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {
     h: 'help', v: 'version',
@@ -58,52 +60,40 @@ var cli = require('meow')([
  */
 
 if (cli.flags.output) cli.flags.html = true
+if (cli.flags.json || cli.flags.yaml) cli.flags.data = true
 
 if (typeof cli.flags.transform === 'string') {
   cli.flags.transform = cli.flags.transform.split(',')
 }
 
-cli.flags.mode =
-  cli.flags.html ? 'html' :
-  cli.flags.data ? 'data' :
-  cli.flags.templates ? 'templates' :
-  'data'
+cli.flags.mode = cli.flags.data ? 'data' : 'html'
 
 /*
  * Options to send to styledown.parse() and styledown.render()
  */
 
 var opts = {
-  parse: {
-    transform: cli.flags.transform
+  build: {
+    transform: cli.flags.transform,
+    skipAssets: cli.flags.skipAssets
   },
-  render: {
-    layout: cli.flags.layout && fs.readFileSync(cli.flags.layout, 'utf-8'),
-    layoutEngine: cli.flags.layout && getExtension(cli.flags.layout)
-  }
-}
-
-if (cli.flags.sampleLayout) {
-  printSampleLayout()
-  process.exit(0)
+  render: {}
 }
 
 /*
  * Perform
  */
 
-read(cli.input)
-.then(function (res) {
-  res.files.forEach(function (file) {
-    if (file.error) throw file.error
-  })
+run()
 
-  var data = styledown.parse(res.files, opts.parse)
+function run () {
+  const files = styledown.read(cli.input)
+  var data = styledown.build(files, opts.build)
 
   let output
   switch (cli.flags.mode) {
     case 'html':
-      const files = renderAll(data, opts.render)
+      const files = styledown.render(data, opts.render)
       write(files, cli.flags.output || '-')
       break
 
@@ -112,30 +102,9 @@ read(cli.input)
       write(output, cli.flags.output || '-')
       break
 
-    case 'templates':
-      const templates = styledown.build(data)
-      output = cli.flags.yaml ? toYaml(templates) : toJson(templates)
-      write(output, cli.flags.output || '-')
-      break
-
     default:
       console.warn('!! not implemented')
   }
-})
-
-/*
- * Render many files
- */
-
-function renderAll (data, options) {
-  templates = styledown.build(data)
-
-  return reduce(templates.files, (result, file, fname) => {
-    result[fname] = {
-      contents: styledown.render(templates, fname, options)
-    }
-    return result
-  }, {})
 }
 
 /*
@@ -152,25 +121,6 @@ function toYaml (data) {
 
 function toJson (data) {
   return JSON.stringify(data, null, 2)
-}
-
-/*
- * Print sample layout
- */
-
-function printSampleLayout () {
-  if (process.stdout.isTTY) {
-    console.error('\033[31m')
-    console.error('  Sample Styledown layout:')
-    console.error('  Please save this file as `layout.ejs`. That is:')
-    console.error('')
-    console.error('      styledown --sample-layout > layout.ejs')
-    console.error('')
-    console.error('  You can then pass it on via `styledown --layout layout.ejs`.')
-    console.error('\033[0m')
-  }
-
-  process.stdout.write(fs.readFileSync(__dirname + '/../data/layout.ejs', 'utf-8'))
 }
 
 function getExtension (filename) {

@@ -1,11 +1,8 @@
 styledown := ../../bin/styledown
 
-all: html html.nolayout
+all: html
 
 html:
-	${styledown} *.md -t jade -o html -l layout.ejs --html
+	${styledown} . -t jade -o html
 
-html.nolayout:
-	${styledown} *.md -t jade -o html.nolayout --html
-
-.PHONY: all html html.nolayout
+.PHONY: all html

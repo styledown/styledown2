@@ -7,18 +7,19 @@
     "url": "https://github.com/styledown/styledown/issues"
   },
   "dependencies": {
-    "@rstacruz/jstransformer": "0.0.4-1-gc60b97c",
     "any-promise": "1.1.0",
     "babel-plugin-transform-react-jsx": "6.22.0",
     "babel-preset-es2015": "6.6.0",
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "6.22.0",
-    "babelify": "7.2.0",
     "classnames": "2.2.5",
+    "hogan.js": "3.0.2",
     "js-yaml": "3.6.0",
+    "jstransformer": "1.0.0",
     "jstransformer-ejs": "^0.0.3",
-    "jstransformer-jade": "^0.1.0",
+    "jstransformer-pug": "0.2.3",
     "lodash.kebabcase": "4.0.1",
+    "lru-cache": "4.0.2",
     "markdown-it": "6.0.1",
     "markdown-it-named-headings": "1.1.0",
     "meow": "3.7.0",
@@ -31,11 +32,22 @@
     "unidecode": "0.1.8"
   },
   "devDependencies": {
-    "ava": "0.14.0",
+    "ava": "0.18.1",
+    "babelify": "7.3.0",
+    "brfs": "1.4.3",
     "browserify": "13.0.0",
+    "cssnano": "3.10.0",
+    "dedent": "0.7.0",
     "docpress": "0.6.11",
     "git-update-ghpages": "1.3.0",
-    "redent": "1.0.0",
+    "jsdom": "9.10.0",
+    "nodemon": "1.11.0",
+    "npm-run-all": "4.0.1",
+    "postcss": "5.2.12",
+    "postcss-cli": "2.6.0",
+    "postcss-cssnext": "2.9.0",
+    "redent": "2.0.0",
+    "serve": "3.3.0",
     "uglify-js": "2.6.2"
   },
   "files": [
@@ -56,8 +68,18 @@
     "url": "git+ssh://git@github.com/styledown/styledown.git"
   },
   "scripts": {
-    "build": "browserify external.js -t babelify -s Styledown > dist/styledown-external.js",
-    "build:min": "browserify external.js -t babelify -s Styledown | uglifyjs -cm > dist/styledown-external.js",
+    "assets:build": "run-p assets:build:js assets:build:css",
+    "assets:build:css": "postcss -u postcss-cssnext -u cssnano assets/style.css -o cache/style.css",
+    "assets:build:js": "browserify -t babelify assets/script.js | uglifyjs -c warnings=false -m > cache/script.js",
+    "assets:watch": "run-p assets:watch:css assets:watch:js",
+    "assets:watch:css": "nodemon -C --exec \"run-s assets:build:css\" --ext \"css\" --watch assets --quiet",
+    "assets:watch:js": "nodemon -C --exec \"run-s assets:build:js\" --ext \"js\" --watch assets --quiet",
+    "example": "run-s assets:build example:post",
+    "example:post": "run-p -l example:watch example:serve assets:watch",
+    "example:build": "cd examples/bootstrap && make",
+    "example:serve": "cd examples/bootstrap/html && serve",
+    "example:watch": "cd examples/bootstrap && nodemon --exec make --ext \"md\" --watch . --watch ../../assets --quiet",
+    "prepublish": "run-s assets:build",
     "test": "ava"
   },
   "babel": {
@@ -75,6 +97,8 @@
     ]
   },
   "ava": {
-    "require": ["babel-register"]
+    "require": [
+      "babel-register"
+    ]
   }
 }

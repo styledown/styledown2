@@ -8,8 +8,8 @@ void (function () {
   })
 
   function decorateExample ($example) {
-    var $figure = $example.querySelector('.figure')
-    var $source = $example.querySelector('.source')
+    var $figure = $example.querySelector('.styleguide-example-figure')
+    var $source = $example.querySelector('.styleguide-example-source')
     var collapsed
 
     function collapse () {

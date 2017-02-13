@@ -1,7 +1,7 @@
 {
-  "name": "styledown",
+  "name": "styledown2",
   "description": "Write maintainable CSS styleguides using Markdown.",
-  "version": "2.0.0-pre1",
+  "version": "2.0.0-pre2",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "bugs": {
     "url": "https://github.com/styledown/styledown/issues"
@@ -54,7 +54,7 @@
     "cache",
     "lib"
   ],
-  "homepage": "https://github.com/styledown/styledown#readme",
+  "homepage": "https://github.com/styledown/styledown2#readme",
   "keywords": [
     "css",
     "markdown",
@@ -64,7 +64,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/styledown/styledown.git"
+    "url": "git+ssh://git@github.com/styledown/styledown2.git"
   },
   "scripts": {
     "assets:build": "run-p assets:build:js assets:build:css",

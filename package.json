@@ -69,8 +69,8 @@
   },
   "scripts": {
     "assets:build": "run-p assets:build:js assets:build:css",
-    "assets:build:css": "postcss -u postcss-cssnext -u cssnano assets/style.css -o dist/style.css",
-    "assets:build:js": "browserify -t babelify assets/script.js | uglifyjs -c warnings=false -m > dist/script.js",
+    "assets:build:css": "postcss -u postcss-cssnext -u cssnano assets/style.css -o cache/style.css",
+    "assets:build:js": "browserify -t babelify assets/script.js | uglifyjs -c warnings=false -m > cache/script.js",
     "assets:watch:css": "nodemon --exec \"run-s assets:build:css\" --ext \"css\" --watch assets --quiet",
     "assets:watch:js": "nodemon --exec \"run-s assets:build:js\" --ext \"js\" --watch assets --quiet",
     "dist": "browserify bare.js -t brfs -t babelify -s Styledown > dist/styledown-external.js",

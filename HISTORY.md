@@ -1,3 +1,10 @@
+## [v2.0.0-pre4]
+> Feb 14, 2017
+
+- Fix Ruby implementation.
+
+[v2.0.0-pre4]: http://github.com/styledown/styledown2/compare/v2.0.0-pre2...v2.0.0-pre4
+
 ## [v2.0.0-pre2]
 > Feb 14, 2017
 

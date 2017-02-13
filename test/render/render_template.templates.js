@@ -25,10 +25,7 @@ test('renders templates', t => {
     <title>Hello</title>
   `)) !== -1)
 
-  t.true(normalize(html).indexOf(normalize(`
-    <div class='styleguide-menu'>
-    </div>
-  `)) !== -1)
+  t.true(normalize(html).indexOf("styleguide-menu") !== -1)
 
   t.true(normalize(html).indexOf(normalize(`
     <section class='styleguide-section -h2'>

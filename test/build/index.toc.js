@@ -20,11 +20,15 @@ test('generates toc', t => {
     { toc:
        { sections:
           [ { title: 'Buttons',
-              source: 'buttons.md',
-              basename: 'buttons' },
+              href: 'buttons.md',
+              depth: 1,
+              isParent: false },
             { title: 'Panels',
-              source: 'panels.md',
-              basename: 'panels' } ] } }
+              href: 'panels.md',
+              depth: 1,
+              isParent: false } ],
+         depth: 0,
+         isParent: true } }
 
   t.deepEqual(output.toc, expected.toc)
 })
@@ -41,17 +45,19 @@ test('tocify()', t => {
   var expected =
     { sections:
        [ { title: 'Home',
-           source: 'index.md',
-           basename: 'index',
+           href: 'index.md',
+           isParent: false,
            depth: 1 },
          { title: 'Document',
            sections:
             [ { title: 'Index',
-                source: 'index.md',
-                basename: 'index',
+                href: 'index.md',
+                isParent: false,
                 depth: 2 } ],
-                depth: 1 } ],
-      depth: 0 }
+           isParent: true,
+           depth: 1 } ],
+      depth: 0,
+      isParent: true }
 
   t.deepEqual(output, expected)
 })

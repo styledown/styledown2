@@ -6163,16 +6163,6 @@ postcss@5.2.12, postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.1
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-preact-render-to-string@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-3.5.0.tgz#35c741d4683e95404a94170ec7251ea5f71037b6"
-  dependencies:
-    pretty-format "^3.5.1"
-
-preact@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-7.2.0.tgz#8aacc97465a65509bc556604a7750d48e2fa7ad1"
-
 prelude-ls@~1.1.0, prelude-ls@~1.1.1, prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -6190,10 +6180,6 @@ pretty-format@^18.1.0:
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-18.1.0.tgz#fb65a86f7a7f9194963eee91865c1bcf1039e284"
   dependencies:
     ansi-styles "^2.2.1"
-
-pretty-format@^3.5.1:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
 
 pretty-ms@^0.2.1:
   version "0.2.2"
@@ -6462,10 +6448,6 @@ read-file-stdin@^0.2.0:
   resolved "https://registry.yarnpkg.com/read-file-stdin/-/read-file-stdin-0.2.1.tgz#25eccff3a153b6809afacb23ee15387db9e0ee61"
   dependencies:
     gather-stream "^1.0.0"
-
-read-input@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/read-input/-/read-input-0.3.1.tgz#5b3169308013464ffda6ec92e58d2d3cea948df1"
 
 read-only-stream@^1.1.1:
   version "1.1.1"

@@ -3,13 +3,13 @@ const writeFileSync = require('fs').writeFileSync
 const readFileSync = require('fs').readFileSync
 const resolve = require('path').resolve
 
-const VERSION = require('../package.json').version
+const VERSION = require('../../package.json').version
   .replace(/-/g, '.')
 
 mkdirp('lib/styledown/source/')
 
 const SOURCE = readFileSync(
-  resolve(__dirname, '../dist/styledown-external.js'), 'utf-8')
+  resolve(__dirname, '../../dist/styledown-external.js'), 'utf-8')
 
 const VERSION_FILE =
 `# coding: utf-8

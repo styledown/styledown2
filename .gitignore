@@ -3,4 +3,4 @@ node_modules
 /_docpress
 /cache/*.js
 /cache/*.css
-/styledown-source.rb/lib
+/integrations/ruby/lib

@@ -42,12 +42,16 @@ test('tocify()', t => {
     { sections:
        [ { title: 'Home',
            source: 'index.md',
-           basename: 'index' },
+           basename: 'index',
+           depth: 1 },
          { title: 'Document',
            sections:
             [ { title: 'Index',
                 source: 'index.md',
-                basename: 'index' } ] } ] }
+                basename: 'index',
+                depth: 2 } ],
+                depth: 1 } ],
+      depth: 0 }
 
   t.deepEqual(output, expected)
 })

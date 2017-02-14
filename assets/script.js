@@ -35,4 +35,4 @@ void (function () {
     $figure.addEventListener('click', function () { toggle() })
     collapse()
   }
-}());
+}())

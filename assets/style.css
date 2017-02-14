@@ -1,3 +1,16 @@
+/*
+ * Variables
+ */
+
+:root {
+  --sidebar-width: 256px;
+  --line-color: rgba(0, 0, 0, 0.08);
+}
+
+/*
+ * Semi-reset
+ */
+
 .styleguide-text,
 .styleguide-section,
 .styleguide-code,
@@ -261,6 +274,24 @@
 }
 
 /*
+ * Layout
+ */
+
+@media (min-width: 769px) {
+  .styleguide-layout {
+    padding-left: 0;
+  }
+
+  html.-styleguide-loaded .styleguide-layout {
+    transition: padding-left 150ms ease-out;
+  }
+
+  html.-styleguide-sidebar-open .styleguide-layout {
+    padding-left: var(--sidebar-width);
+  }
+}
+
+/*
  * Magic sidebar
  */
 
@@ -293,10 +324,12 @@
   border-radius: 50%;
   z-index: 5;
   box-shadow: 0 2px 4px rgba(0, 40, 80, .1);
-  transition: box-shadow 150ms ease-out;
 
   line-height: 48px;
   text-align: center;
+}
+
+htlm.-styleguide-loaded .styleguide-sidebar-button {
   transition: transform 150ms ease-out,
     background-color 150ms ease-out,
     box-shadow 150ms ease-out;
@@ -320,7 +353,6 @@
 }
 
 :checked ~ .styleguide-sidebar-button {
-  transform: translate3d(176px, 0, 0);
   background-color: transparent;
   box-shadow: none;
 }
@@ -328,16 +360,19 @@
 /* Menu */
 .styleguide-sidebar-contents {
   opacity: 0;
-  transform: translate3d(-264px, 0, 0);
-  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  transform: translate3d(calc(-1 * var(--sidebar-width) - 8px), 0, 0);
   background: white;
-  width: 256px;
+  width: var(--sidebar-width);
   height: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   pointer-events: none;
   overflow: hidden;
   z-index: 3;
   position: relative;
+  border-right: solid 1px var(--line-color);
+}
+
+html.-styleguide-loaded .styleguide-sidebar-contents {
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
 }
 
 /* Active menu */
@@ -348,24 +383,30 @@
 }
 
 .styleguide-sidebar-screen {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: black;
-  z-index: 0;
-  pointer-events: none;
-  transition: opacity 150ms ease-out;
-  opacity: 0;
-  margin: 0;
-  padding: 0;
+  display: none;
 }
 
-:checked ~ .styleguide-sidebar-screen {
-  pointer-events: auto;
-  opacity: .1;
+@media (max-width: 768px) {
+  .styleguide-sidebar-screen {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: black;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease-out;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  :checked ~ .styleguide-sidebar-screen {
+    pointer-events: auto;
+    opacity: .1;
+  }
 }
 
 /*

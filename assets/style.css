@@ -101,10 +101,11 @@
     opacity: 0;
     background: rgba(0, 0, 0, 0.1);
     transition: opacity 100ms linear;
+  }
 
-    &:hover {
-      opacity: .3;
-    }
+  &:hover::before,
+  &:hover::after {
+    opacity: .3;
   }
 
   &::before {

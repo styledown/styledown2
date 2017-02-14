@@ -53,7 +53,9 @@ cache/script.js: assets/script.js
 #
 
 example: examples/bootstrap/html cache
-	@${bin}/concurrently "make watch-example" "make watch-assets" "make serve-example"
+	@${bin}/concurrently --kill-others \
+		--prefix "[{name}]" --names "example,assets,serve" \
+		"make watch-example" "make watch-assets" "make serve-example"
 examples/bootstrap/html: examples/bootstrap
 	@cd $< && make
 	@echo "==> $@"

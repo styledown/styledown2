@@ -9,6 +9,8 @@ test('read: works on paths', t => {
     'buttons.md',
     'components.md',
     'forms.md',
+    'index.md',
+    'tables.md',
     'templates/head.html',
     'templates/title.html'
   ])

@@ -1,3 +1,7 @@
+const addClass = require('dom101/add-class')
+const removeClass = require('dom101/remove-class')
+const ready = require('dom101/ready')
+
 void (function () {
   ready(function () {
     var examples = document.querySelectorAll('.styleguide-example')
@@ -30,40 +34,5 @@ void (function () {
 
     $figure.addEventListener('click', function () { toggle() })
     collapse()
-  }
-
-  /*
-   * Helpers
-   */
-
-  function ready (fn) {
-    if (document.readyState === 'complete') {
-      return fn()
-    } else if (document.addEventListener) {
-      document.addEventListener('DOMContentLoaded', fn)
-    } else {
-      document.attachEvent('onreadystatechange', function () {
-        if (document.readyState === 'interactive') fn()
-      })
-    }
-  }
-
-  function addClass (el, className) {
-    if (el.classList) {
-      el.classList.add(className);
-    } else {
-      el.className += ' ' + className;
-    }
-  }
-
-  function removeClass (el, className) {
-    if (el.classList) {
-      el.classList.remove(className);
-    } else {
-      var expr =
-        new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi');
-
-      el.className = el.className.replace(expr, ' ');
-    }
   }
 }());

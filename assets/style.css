@@ -486,3 +486,13 @@ html.-styleguide-loaded .styleguide-sidebar-contents {
   padding-left: 16px;
   padding-right: 16px;
 }
+
+/*
+ * iframe
+ */
+
+.styleguide-iframe {
+  border: 0;
+  width: 100%;
+  overflow: hidden;
+}

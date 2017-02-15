@@ -11,19 +11,22 @@ all: rubygem
 # Builds a bare distribution, used by Ruby and Elixir integrations
 #
 
-dist/styledown-external.js: ${SOURCES}
-	@echo "==> building dist/"
-	@${browserify} -t brfs -t babelify -s Styledown bare.js | ${uglifyjs} -c warnings=false -m > dist/styledown-external.js
+dist/styledown-external.js: bare.js ${SOURCES}
+	@echo "--- building: $@"
+	@${bin}/browserify -t brfs -t babelify -s Styledown $< | \
+		${bin}/uglifyjs -c warnings=false -m > $@
+	@ls -lah $@
 
 #
 # Builds the ruby gem
 #
 
 rubygem: \
+	integrations/ruby \
 	dist/styledown-external.js \
 	package.json \
 	integrations/ruby/update.js
-	@echo "==> building integrations/ruby/ (gem)"
+	@echo "--- building: integrations/ruby/ (gem)"
 	@cd integrations/ruby && node update.js
 	@cd integrations/ruby && rm -f *.gem
 	@cd integrations/ruby && gem build *.gemspec
@@ -43,10 +46,10 @@ rubygem-push: rubygem
 cache: cache/style.css cache/script.js
 cache/style.css: assets/style.css
 	@${bin}/postcss -u postcss-cssnext -u cssnano $< -o $@
-	@echo "==> $@"
+	@ls -lah $@
 cache/script.js: assets/script.js
 	@${bin}/browserify -t babelify $< | ${bin}/uglifyjs -c warnings=false -m > $@
-	@echo "==> $@"
+	@ls -lah $@
 
 #
 # Examples
@@ -56,9 +59,12 @@ example: examples/bootstrap/html cache
 	@${bin}/concurrently --kill-others \
 		--prefix "[{name}]" --names "example,assets,serve" \
 		"make watch-example" "make watch-assets" "make serve-example"
-examples/bootstrap/html: examples/bootstrap
+examples/bootstrap/html: examples/bootstrap cache
 	@cd $< && make
-	@echo "==> $@"
+	@tree -h $@
+
+examples/bootstrap/html/README.md:
+	echo "Generated from https://github.com/styledown/styledown2/blob/master/examples/bootstrap" > $@
 
 serve-example:
 	@cd examples/bootstrap/html && ${bin}/serve
@@ -68,5 +74,9 @@ watch-assets:
 watch-example:
 	@${bin}/nodemon -C --exec "make examples/bootstrap/html" --ext "md js css" --watch ${root}/cache --quiet
 
+# Publishes to styledown.github.io/bootstrap-styleguide
+publish-example: examples/bootstrap/html examples/bootstrap/html/README.md
+	${bin}/git-update-ghpages --force --branch gh-pages \
+		styledown/bootstrap-styleguide $<
 
 .PHONY: examples examples/bootstrap/html cache

@@ -1,7 +1,9 @@
 # Table of Contents
 
 * [Bootstrap styleguide](index.md)
-* Basics
+* Layout
+  * [Grid](grid.md)
+* Components
   * [Buttons](buttons.md)
   * [Components](components.md)
   * [Forms](forms.md)

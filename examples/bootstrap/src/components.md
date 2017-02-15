@@ -216,10 +216,10 @@ Add `.progress-bar-striped.active`.
 
 ### Jumbotron
 
-```example.jade.-wide
-.jumbotron
-  .container
-    h1 Hello, earthlings!
+```example.jade.-full
+.container
+  .jumbotron
+    h3 Hello, earthlings!
     p We have now taken over your Internet.
     p
       a.btn.btn-primary.btn-lg Learn more

@@ -1,5 +1,3 @@
-# Bootstrap styleguide
-
 <div class='jumbotron'>
   <div class='container'>
     <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.</p>

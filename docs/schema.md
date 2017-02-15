@@ -77,6 +77,7 @@ A file has the following fields:
 - `class` - additional CSS classnames. Starts with a space if it isn't blank.
 - `title` - The title, taken from the *H2* or *H3* element that started the section.
 - `depth` - _1_, _2_ or _3_.
+- `hasHeading` - true if it starts with an h1, h2, or h3 heading.
 - `parts` - a Dictionary
 
 ## Parts

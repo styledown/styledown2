@@ -73,3 +73,91 @@ test('multiple blocks', t => {
   t.true(part.type === 'text')
   t.regex(part.content, /This is a footer/)
 })
+
+test('text before headings', t => {
+  let section, part
+
+  const out = build({
+    'components.md': {
+      contents: dedent `
+        Hello
+        ### First header`
+    }
+  })
+
+  const file = out.files['components.html']
+
+  section = file.sections[0]
+  t.true(section.hasHeading === false)
+  t.true(section.id === '_prelude')
+  t.true(section.depth === 0)
+  t.true(section.class === '')
+  t.true(section.parts.length === 1)
+
+  part = section.parts[0]
+  t.true(part.id === '_prelude-text')
+  t.true(part.type === 'text')
+  t.true(part.content === '<p>Hello</p>')
+
+  section = file.sections[1]
+  t.true(section.hasHeading === true)
+})
+
+test('text before headings with multiple tokens', t => {
+  let section, part
+
+  const out = build({
+    'components.md': {
+      contents: dedent `
+        Hello
+
+        * World
+
+        ### First header`
+    }
+  })
+
+  const file = out.files['components.html']
+
+  section = file.sections[0]
+  t.true(section.hasHeading === false)
+  t.true(section.id === '_prelude')
+  t.true(section.depth === 0)
+  t.true(section.class === '')
+  t.true(section.parts.length === 1)
+
+  part = section.parts[0]
+  t.true(part.id === '_prelude-text')
+  t.true(part.type === 'text')
+  t.true(part.content === '<p>Hello</p>\n<ul>\n<li>World</li>\n</ul>')
+
+  section = file.sections[1]
+  t.true(section.hasHeading === true)
+})
+
+test('text before headings without headings', t => {
+  let section, part
+
+  const out = build({
+    'components.md': {
+      contents: dedent `
+        Hello
+
+        * World`
+    }
+  })
+
+  const file = out.files['components.html']
+
+  section = file.sections[0]
+  t.true(section.hasHeading === false)
+  t.true(section.id === '_prelude')
+  t.true(section.depth === 0)
+  t.true(section.class === '')
+  t.true(section.parts.length === 1)
+
+  part = section.parts[0]
+  t.true(part.id === '_prelude-text')
+  t.true(part.type === 'text')
+  t.true(part.content === '<p>Hello</p>\n<ul>\n<li>World</li>\n</ul>')
+})

@@ -11,6 +11,7 @@ test('renders templates', t => {
         depth: 2,
         id: 'btn',
         title: 'Buttons',
+        hasHeading: true,
         parts: [
           { id: 'part',
             isText: true,

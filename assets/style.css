@@ -202,8 +202,8 @@
 
 @media (min-width: 1181px) {
   .styleguide-example.-full {
-    margin-left: calc(-50vw + var(--body-width) / 2 - 6px);
-    margin-right: calc(-50vw + var(--body-width) / 2 - 6px);
+    margin-left: calc(-50vw + var(--body-width) / 2);
+    margin-right: calc(-50vw + var(--body-width) / 2);
   }
 
   html.-styleguide-sidebar-open .styleguide-example.-full {

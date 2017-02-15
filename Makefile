@@ -70,9 +70,16 @@ serve-example:
 	@cd examples/bootstrap/html && ${bin}/serve
 
 watch-assets:
-	@${bin}/nodemon -C --exec "make cache" --ext "css js" --watch assets --quiet
+	@${bin}/nodemon -C --quiet \
+		--exec "make cache" \
+		--ext "css js" \
+		--watch assets
+
 watch-example:
-	@${bin}/nodemon -C --exec "make examples/bootstrap/html" --ext "md js css" --watch ${root}/cache --quiet
+	@${bin}/nodemon -C --quiet \
+		--exec "make examples/bootstrap/html" \
+		--ext "md js css" \
+		--watch ${root}/cache
 
 # Publishes to styledown.github.io/bootstrap-styleguide
 publish-example: examples/bootstrap/html examples/bootstrap/html/README.md

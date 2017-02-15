@@ -1,6 +1,6 @@
 styledown := ../../bin/styledown
 
-html:
-	@${styledown} . -t jade -o html
+html: src
+	@${styledown} $< -t jade -o $@
 
 .PHONY: html

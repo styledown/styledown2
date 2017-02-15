@@ -3,6 +3,7 @@
 * __[Styledown](../README.md)__
 * __Installation__
   * Rails
+  * Ruby
   * Webpack
   * Elixir
   * Command-line (JavaScript)

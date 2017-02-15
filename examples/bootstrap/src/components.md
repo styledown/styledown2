@@ -150,17 +150,17 @@ Use `.panel-primary` (and so on).
 
 ```example.jade.-clear
 .row
-  .col-sm-4
+  .col-xs-4
     .panel.panel-primary
       .panel-heading Primary
       .panel-body panel-primary
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-success
       .panel-heading Success
       .panel-body panel-success
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-info
       .panel-heading Info
       .panel-body panel-info

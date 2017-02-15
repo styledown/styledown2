@@ -3,6 +3,7 @@ const removeClass = require('dom101/remove-class')
 const ready = require('dom101/ready')
 const on = require('dom101/on')
 const requestAnimationFrame = require('raf')
+const each = require('dom101/each')
 
 !(function () {
   ready(function () {
@@ -74,4 +75,42 @@ const requestAnimationFrame = require('raf')
   requestAnimationFrame(() => {
     addClass($html, '-styleguide-loaded')
   })
+}())
+
+/*
+ * Auto size iframes
+ */
+
+!(function () {
+  const INTERVAL = 1000
+
+  const $frames = document.querySelectorAll('iframe')
+
+  function update () {
+    each($frames, resizeFrame)
+  }
+
+  function resizeFrame ($frame) {
+    const html = $frame &&
+      $frame.contentDocument &&
+      $frame.contentDocument.documentElement
+    if (!html) return
+
+    const height = html.offsetHeight + 16
+    $frame.setAttribute('style', `height: ${height}px`)
+  }
+
+  on(window, 'resize', () => {
+    update()
+  })
+
+  function tick () {
+    requestAnimationFrame(() => {
+      update()
+      setTimeout(tick, INTERVAL)
+    })
+  }
+
+  update()
+  tick()
 }())

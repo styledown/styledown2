@@ -1,4 +1,4 @@
-# API phases
+# Rendering pipeline
 
 Processing a Styledown project happens in 3 parts: `read`, `build`, and `render`. This is a pipeline like so:
 

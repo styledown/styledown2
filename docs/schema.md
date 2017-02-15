@@ -14,6 +14,16 @@ Given this input:
 
 ## Sample output
 
+You can compile the above using:
+
+```
+styledown components.md --data
+```
+
+```js
+build(read('path/to/components.md'))
+```
+
 You'll get this JSON output:
 
 ```json
@@ -22,25 +32,23 @@ You'll get this JSON output:
     { "title": "Components",
       "name": "components.md",
       "sections":
-        { "components":
-          { "id": "components",
+        [ { "id": "components",
             "title": "Components",
             "depth": 1 },
-          "top-header":
           { "id": "top-header",
             "title": "Top header",
             "depth": 3,
             "parts":
-            { "s1":
-              { "type": "text",
+            [ { "type": "text",
                 "language": "html",
                 "content": "<p>This is the main header partial.</p>" },
-              "s2":
               { "type": "example",
                 "language": "haml",
-                "content": "= render 'components/top_header'" } } } } } },
+                "content": "= render 'components/top_header'" } ] } ] } },
   "toc": { ...  } }
 ```
+
+### Composition
 
 It breaks down like so:
 
@@ -63,7 +71,7 @@ A file has the following fields:
 
 > `files.*.sections`
 
-`sections` is a Dictionary where the key is the section ID, and the value is the section details. A section starts from a H1, H2, or H3 heading, followed the other blocks that follow it.
+`sections` is an array of section details. A section starts from a H1, H2, or H3 heading, followed the other blocks that follow it.
 
 - `id`
 - `title` - The title, taken from the *H2* or *H3* element that started the section.
@@ -72,15 +80,18 @@ A file has the following fields:
 
 ## Parts
 
-> `files.*.sections.*.parts`
+> `files.*.sections[].parts`
 
-`parts` is a Dictionary where the key is the Part ID, and the value is the part details.
+`parts` is an array of part details.
 
 - `id`
 - `type` - Can be _'example'_, _'text'_, or _'code'_.
-- `language`
-- `content`
-- `source` - If it was transpiled, the original source will be stored here.
+- `isExample` - true if type is 'example'.
+- `isText` - true if type is 'text'.
+- `isCode` - true if type is 'code'.
+- `language` - Language that 'source' is written in (eg, 'html'). ?
+- `content` - The figure's HTML.
+- `source` - The source code.
 
 ## Table of Contents
 

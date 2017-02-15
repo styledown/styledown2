@@ -20,7 +20,7 @@ test('renders templates', t => {
     ]
   }
 
-  const html = render(data, templates)
+  const html = render(data, templates, 'styleguide')
 
   t.true(normalize(html).indexOf(normalize(`
     <title>Hello</title>

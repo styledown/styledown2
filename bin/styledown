@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const styledown = require('../index')
 const write = require('../lib/cli/write')
+const renderData = require('../lib/cli/render_data')
 
 /*
  * Help text
@@ -18,9 +19,10 @@ Output formats:
   -H, --html              output rendered HTML (default)
       --data              output raw data
 
-Data output options: (implies --data)
-      --json              parse into JSON data (default)
-      --yaml              parse into YAML data
+Data output options:
+      --json              display in JSON format (default)
+      --yaml              display in YAML format
+      --inspect           display in inspect format
 
 HTML output options: (implies --html)
   -o, --output DIR        render output HTML to DIR
@@ -46,7 +48,7 @@ Examples:
  */
 
 var cli = require('meow')(HELP, {
-  boolean: ['help', 'version', 'yaml', 'json', 'html', 'skipAssets'],
+  boolean: ['help', 'version', 'yaml', 'json', 'html', 'skipAssets', 'inspect'],
   string: ['format', 'transform', 'output', 'layout'],
   alias: {
     h: 'help', v: 'version',
@@ -60,7 +62,6 @@ var cli = require('meow')(HELP, {
  */
 
 if (cli.flags.output) cli.flags.html = true
-if (cli.flags.json || cli.flags.yaml) cli.flags.data = true
 
 if (typeof cli.flags.transform === 'string') {
   cli.flags.transform = cli.flags.transform.split(',')
@@ -94,33 +95,17 @@ function run () {
   switch (cli.flags.mode) {
     case 'html':
       const files = styledown.render(data, opts.render)
-      write(files, cli.flags.output || '-')
+      write(files, cli.flags.output || '-', cli.flags)
       break
 
     case 'data':
-      output = cli.flags.yaml ? toYaml(data) : toJson(data)
-      write(output, cli.flags.output || '-')
+      output = renderData(data, cli.flags)
+      write(output, cli.flags.output || '-', cli.flags)
       break
 
     default:
       console.warn('!! not implemented')
   }
-}
-
-/*
- * Parse to YAML (--yaml)
- */
-
-function toYaml (data) {
-  return require('js-yaml').safeDump(data)
-}
-
-/*
- * Parse to JSON (default, --json)
- */
-
-function toJson (data) {
-  return JSON.stringify(data, null, 2)
 }
 
 function getExtension (filename) {

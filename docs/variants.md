@@ -2,4 +2,4 @@
 
 - `-clear`
 - `-dark`
-- `-full` (to be implemented)
+- `-full`

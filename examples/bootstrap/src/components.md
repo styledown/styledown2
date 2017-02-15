@@ -213,3 +213,14 @@ Add `.progress-bar-striped.active`.
 .progress
   .progress-bar.progess-bar-striped.active(style='width: 40%')
 ```
+
+### Jumbotron
+
+```example.jade.-wide
+.jumbotron
+  .container
+    h1 Hello, earthlings!
+    p We have now taken over your Internet.
+    p
+      a.btn.btn-primary.btn-lg Learn more
+```

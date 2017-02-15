@@ -75,8 +75,8 @@ cli.flags.mode = cli.flags.data ? 'data' : 'html'
 
 var opts = {
   build: {
-    transform: cli.flags.transform,
-    skipAssets: cli.flags.skipAssets
+    transform: cli.flags.transform || null,
+    skipAssets: cli.flags.skipAssets || false
   },
   render: {}
 }

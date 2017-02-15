@@ -55,11 +55,12 @@ cache/script.js: assets/script.js
 # Examples
 #
 
-example: examples/bootstrap/html cache
+example: cache examples/bootstrap/html
 	@${bin}/concurrently --kill-others \
 		--prefix "[{name}]" --names "example,assets,serve" \
 		"make watch-example" "make watch-assets" "make serve-example"
-examples/bootstrap/html: examples/bootstrap cache
+
+examples/bootstrap/html: examples/bootstrap
 	@cd $< && make
 	@tree -h $@
 
@@ -79,7 +80,8 @@ watch-example:
 	@${bin}/nodemon -C --quiet \
 		--exec "make examples/bootstrap/html" \
 		--ext "md js css" \
-		--watch ${root}/cache
+		--watch examples/bootstrap/src \
+		--watch cache
 
 # Publishes to styledown.github.io/bootstrap-styleguide
 publish-example: examples/bootstrap/html examples/bootstrap/html/README.md

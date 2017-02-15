@@ -74,6 +74,7 @@ A file has the following fields:
 `sections` is an array of section details. A section starts from a H1, H2, or H3 heading, followed the other blocks that follow it.
 
 - `id`
+- `class` - additional CSS classnames. Starts with a space if it isn't blank.
 - `title` - The title, taken from the *H2* or *H3* element that started the section.
 - `depth` - _1_, _2_ or _3_.
 - `parts` - a Dictionary

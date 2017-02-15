@@ -7,7 +7,7 @@ styling. All textual `<input>`, `<textarea>`, and `<select>` elements
 with `.form-control` are set to `width: 100%;` by default. Wrap
 labels and controls in .form-group for optimum spacing.
 
-```example.jade.-wide
+```example.jade
 .form-group
   label Email address
   input.form-control(placeholder='hi@gmail.com')

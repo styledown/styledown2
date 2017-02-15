@@ -8,6 +8,7 @@
   --margin-color: dodgerblue;
   --figure-small-padding: 8px;
   --figure-padding: 16px;
+  --body-width: 960px;
 }
 
 /*
@@ -58,17 +59,23 @@
   margin-bottom: 16px;
 }
 
-@media (min-width: 768px) {
-  .styleguide-text {
-    clear: both;
-    float: right;
-    width: 30%;
-    padding-left: 16px;
-  }
+/*
+ * "Literate style"
+ */
 
-  .styleguide-example {
-    float: left;
-    width: 70%;
+@media (min-width: 768px) {
+  .styleguide-section.-literate-style {
+    & > .styleguide-text {
+      clear: both;
+      float: right;
+      width: 30%;
+      padding-left: 16px;
+    }
+
+    & > .styleguide-example {
+      float: left;
+      width: 70%;
+    }
   }
 }
 
@@ -87,7 +94,13 @@
 .styleguide-example {
   border-radius: 2px;
   border: solid 2px transparent;
-  overflow: hidden;
+}
+
+.styleguide-example::after {
+  content: '';
+  display: table;
+  clear: both;
+  zoom: 1;
 }
 
 /*
@@ -179,6 +192,27 @@
 }
 
 /*
+ * Wide variant
+ */
+
+.styleguide-example.-full {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+@media (min-width: 1181px) {
+  .styleguide-example.-full {
+    margin-left: calc(-50vw + var(--body-width) / 2 - 6px);
+    margin-right: calc(-50vw + var(--body-width) / 2 - 6px);
+  }
+
+  html.-styleguide-sidebar-open .styleguide-example.-full {
+    margin-left: calc(-50vw + var(--sidebar-width) / 2 + var(--body-width) / 2 + 16px);
+    margin-right: calc(-50vw + var(--sidebar-width) / 2 + var(--body-width) / 2 + 16px);
+  }
+}
+
+/*
  * Dark variant
  */
 
@@ -222,7 +256,13 @@
 }
 
 .styleguide-example.-expand.-clear > .styleguide-example-figure {
-  padding: 16px;
+  padding: var(--figure-padding);
+}
+
+@media (max-width: 768px) {
+  .styleguide-example.-expand.-clear > .styleguide-example-figure {
+    padding: var(--figure-small-padding);
+  }
 }
 
 /*
@@ -441,15 +481,8 @@ html.-styleguide-loaded .styleguide-sidebar-contents {
  */
 
 .styleguide-body {
-  max-width: 960px;
+  max-width: var(--body-width);
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
-}
-
-@media (max-width: 480px) {
-  .styleguide-body {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
 }

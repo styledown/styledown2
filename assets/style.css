@@ -115,6 +115,7 @@
     opacity: .5;
     background: transparent;
     transition: opacity 100ms linear;
+    pointer-events: none;
   }
 
   &::before {

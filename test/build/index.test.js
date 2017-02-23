@@ -64,3 +64,39 @@ test('respects skipAssets: true', t => {
   t.true(typeof result.files['styledown/script.js'] === 'undefined')
   t.true(typeof result.files['styledown/style.css'] === 'undefined')
 })
+
+test.only('frames', t => {
+  const result = build(FILES)
+  let header, file
+
+  file = result.files['components.html']
+  console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
+  t.true(file.title === 'Components')
+
+  header = file.sections[0]
+  t.true(header.title === 'Components')
+  t.true(header.depth === 1)
+  t.true(header.id === 'components')
+
+  header = file.sections[1]
+  t.true(header.title === 'header')
+  t.true(header.depth === 3)
+  t.true(header.id === 'header')
+  t.true(header.parts[0].id === 'header-1')
+  t.true(header.parts[0].type === 'text')
+  t.true(header.parts[0].content === '<p>This is a header</p>')
+  t.true(header.parts[1].id === 'header-2')
+  t.true(header.parts[1].type === 'example')
+  // t.true(header.parts[1].language === undefined)
+  // t.true(header.parts[1].source === undefined)
+  // t.true(header.parts[1].content === undefined)
+
+  file = result.files['examples/components--header-2.html']
+  console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
+  // t.true(file.type === 'text/html')
+  // t.true(file.layout === 'figure')
+  // t.true(file.part.content === '= render \'header\'')
+  // t.true(file.part.source === '= render \'header\'')
+  // t.true(file.part.language === 'haml')
+  t.true(false)
+})

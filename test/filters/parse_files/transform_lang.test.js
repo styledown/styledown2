@@ -1,5 +1,5 @@
 const test = require('ava')
-const transformLang = require('../../lib/build/transform_lang')
+const transformLang = require('../../../lib/filters/parse_files/transform_lang')
 
 test('works', t => {
   const result = transformLang({

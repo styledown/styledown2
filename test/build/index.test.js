@@ -65,7 +65,7 @@ test('respects skipAssets: true', t => {
   t.true(typeof result.files['styledown/style.css'] === 'undefined')
 })
 
-test.only('frames', t => {
+test('frames', t => {
   const result = build(FILES)
   let header, file, part
 

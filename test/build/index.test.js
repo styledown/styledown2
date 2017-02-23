@@ -67,7 +67,7 @@ test('respects skipAssets: true', t => {
 
 test.only('frames', t => {
   const result = build(FILES)
-  let header, file
+  let header, file, part
 
   file = result.files['components.html']
   console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
@@ -82,21 +82,28 @@ test.only('frames', t => {
   t.true(header.title === 'header')
   t.true(header.depth === 3)
   t.true(header.id === 'header')
-  t.true(header.parts[0].id === 'header-1')
-  t.true(header.parts[0].type === 'text')
-  t.true(header.parts[0].content === '<p>This is a header</p>')
-  t.true(header.parts[1].id === 'header-2')
-  t.true(header.parts[1].type === 'example')
+
+  part = header.parts[0]
+  t.true(part.id === 'header-1')
+  t.true(part.type === 'text')
+  t.true(part.content === '<p>This is a header</p>')
+
+  part = header.parts[1]
+  t.true(part.id === 'header-2')
+  t.true(part.type === 'example')
   // t.true(header.parts[1].language === undefined)
   // t.true(header.parts[1].source === undefined)
   // t.true(header.parts[1].content === undefined)
+  // t.true(header.parts[1].frameSrc === 'examples/components--header-2.html')
 
   file = result.files['examples/components--header-2.html']
   console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
   // t.true(file.type === 'text/html')
   // t.true(file.layout === 'figure')
-  // t.true(file.part.content === '= render \'header\'')
-  // t.true(file.part.source === '= render \'header\'')
-  // t.true(file.part.language === 'haml')
+
+  // part = file.part
+  // t.true(part.content === '= render \'header\'')
+  // t.true(part.source === '= render \'header\'')
+  // t.true(part.language === 'haml')
   t.true(false)
 })

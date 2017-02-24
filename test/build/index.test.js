@@ -65,12 +65,12 @@ test('respects skipAssets: true', t => {
   t.true(typeof result.files['styledown/style.css'] === 'undefined')
 })
 
-test('frames', t => {
+test.only('frames', t => {
   const result = build(FILES)
   let header, file, part
 
   file = result.files['components.html']
-  console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
+  // console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
   t.true(file.title === 'Components')
 
   header = file.sections[0]
@@ -91,10 +91,10 @@ test('frames', t => {
   part = header.parts[1]
   t.true(part.id === 'header-2')
   t.true(part.type === 'example')
-  // t.true(header.parts[1].language === undefined)
-  // t.true(header.parts[1].source === undefined)
-  // t.true(header.parts[1].content === undefined)
-  // t.true(header.parts[1].frameSrc === 'examples/components--header-2.html')
+  t.true(part.language === undefined)
+  t.true(part.source === undefined)
+  t.true(part.content === undefined)
+  // t.true(part.frameSrc === 'examples/components--header-2.html')
 
   file = result.files['examples/components--header-2.html']
   console.log('file:', require('util').inspect(file, { depth: null, colors: true }))

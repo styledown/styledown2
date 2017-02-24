@@ -11,12 +11,14 @@ const CONTENTS = dedent `
   .hello world
   ~~~`
 
+const EXAMPLE_FILE = 'examples/components/header-2.html'
+
 test('transforming jade', t => {
-  var out = build({
+  let out = build({
     'components.html': { contents: CONTENTS }
   }, { transform: ['jade'] })
 
-  var example = out.files['components.html'].sections[1].parts[1]
+  let example = out.files[EXAMPLE_FILE]
   t.true(example.language === 'html')
   t.true(example.content === '<div class="hello">world</div>')
   t.true(example.source === '.hello world')
@@ -27,7 +29,7 @@ test('dont transform if not specified', t => {
     'components.html': { contents: CONTENTS }
   })
 
-  var example = out.files['components.html'].sections[1].parts[1]
+  let example = out.files[EXAMPLE_FILE]
   t.true(example.language === 'jade')
   t.true(example.content === '.hello world')
 })

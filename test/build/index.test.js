@@ -15,31 +15,6 @@ const FILES = {
   }
 }
 
-test('block with example', t => {
-  const result = build(FILES)
-  let header
-
-  const file = result.files['components.html']
-  t.true(file.title === 'Components')
-
-  header = file.sections[0]
-  t.true(header.title === 'Components')
-  t.true(header.depth === 1)
-  t.true(header.id === 'components')
-
-  header = file.sections[1]
-  t.true(header.title === 'header')
-  t.true(header.depth === 3)
-  t.true(header.id === 'header')
-  t.true(header.parts[0].id === 'header-1')
-  t.true(header.parts[0].type === 'text')
-  t.true(header.parts[0].content === '<p>This is a header</p>')
-  t.true(header.parts[1].id === 'header-2')
-  t.true(header.parts[1].type === 'example')
-  t.true(header.parts[1].language === 'haml')
-  t.regex(header.parts[1].content, /= render 'header'/)
-})
-
 test('blank extensions', t => {
   const result = build(FILES, { extension: '' })
   let header
@@ -65,7 +40,7 @@ test('respects skipAssets: true', t => {
   t.true(typeof result.files['styledown/style.css'] === 'undefined')
 })
 
-test.only('frames', t => {
+test('frames', t => {
   const result = build(FILES)
   let header, file, part
 
@@ -94,16 +69,15 @@ test.only('frames', t => {
   t.true(part.language === undefined)
   t.true(part.source === undefined)
   t.true(part.content === undefined)
-  // t.true(part.frameSrc === 'examples/components--header-2.html')
+  t.true(part.frameSrc === 'examples/components/header-2.html')
 
-  file = result.files['examples/components--header-2.html']
-  console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
-  // t.true(file.type === 'text/html')
-  // t.true(file.layout === 'figure')
+  file = result.files['examples/components/header-2.html']
+  // console.log('file:', require('util').inspect(file, { depth: null, colors: true }))
+  t.true(file.type === 'text/html')
+  t.true(file.layout === 'figure')
 
   // part = file.part
-  // t.true(part.content === '= render \'header\'')
-  // t.true(part.source === '= render \'header\'')
-  // t.true(part.language === 'haml')
-  t.true(false)
+  t.true(file.content === '= render \'header\'')
+  t.true(file.source === '= render \'header\'')
+  t.true(file.language === 'haml')
 })

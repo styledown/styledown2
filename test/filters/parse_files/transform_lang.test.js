@@ -1,46 +1,54 @@
 const test = require('ava')
 const transformLang = require('../../../lib/filters/parse_files/transform_lang')
 
+const EXAMPLE_NAME = 'examples/foo.html'
+
 test('works', t => {
   const result = transformLang({
-    sections: [
-      { parts: [
-        { type: 'example', language: 'jade', content: 'a.btn Hello' }
-      ] }
-    ]
+    [EXAMPLE_NAME]: {
+      layout: 'figure',
+      type: 'example',
+      language: 'jade',
+      content: 'a.btn Hello'
+    }
   }, { transform: ['jade'] })
 
-  t.is(result.sections[0].parts[0].language, 'html')
-  t.is(result.sections[0].parts[0].sourceLanguage, 'jade')
-  t.is(result.sections[0].parts[0].source, 'a.btn Hello')
-  t.is(result.sections[0].parts[0].content, '<a class="btn">Hello</a>')
+  const file = result[EXAMPLE_NAME]
+  t.is(file.language, 'html')
+  t.is(file.sourceLanguage, 'jade')
+  t.is(file.source, 'a.btn Hello')
+  t.is(file.content, '<a class="btn">Hello</a>')
 })
 
 test('leaves others alone', t => {
   const result = transformLang({
-    sections: [
-      { parts: [
-        { type: 'example', language: 'haml', content: '%a.btn Hello' }
-      ] }
-    ]
+    [EXAMPLE_NAME]: {
+      layout: 'figure',
+      type: 'example',
+      language: 'haml',
+      content: '%a.btn Hello'
+    }
   }, { transform: ['jade'] })
 
-  t.is(result.sections[0].parts[0].language, 'haml')
-  t.is(result.sections[0].parts[0].sourceLanguage, undefined)
-  t.is(result.sections[0].parts[0].content, '%a.btn Hello')
+  const file = result[EXAMPLE_NAME]
+  t.is(file.language, 'haml')
+  t.is(file.sourceLanguage, undefined)
+  t.is(file.content, '%a.btn Hello')
 })
 
 test('works with pug', t => {
   const result = transformLang({
-    sections: [
-      { parts: [
-        { type: 'example', language: 'pug', content: 'a.btn Hello' }
-      ] }
-    ]
+    [EXAMPLE_NAME]: {
+      layout: 'figure',
+      type: 'example',
+      language: 'pug',
+      content: 'a.btn Hello'
+    }
   }, { transform: ['pug'] })
 
-  t.is(result.sections[0].parts[0].language, 'html')
-  t.is(result.sections[0].parts[0].sourceLanguage, 'pug')
-  t.is(result.sections[0].parts[0].source, 'a.btn Hello')
-  t.is(result.sections[0].parts[0].content, '<a class="btn">Hello</a>')
+  const file = result[EXAMPLE_NAME]
+  t.is(file.language, 'html')
+  t.is(file.sourceLanguage, 'pug')
+  t.is(file.source, 'a.btn Hello')
+  t.is(file.content, '<a class="btn">Hello</a>')
 })

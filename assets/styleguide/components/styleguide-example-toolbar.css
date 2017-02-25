@@ -87,6 +87,7 @@
     right: 0;
     text-align: right;
     padding-top: 4px;
+    transform: scale(1);
   }
 
   .button-group {

@@ -1,0 +1,6 @@
+html#styleguide-frame,
+html#styleguide-frame > body {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}

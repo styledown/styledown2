@@ -43,11 +43,15 @@ rubygem-push: rubygem
 # Cached version of js/css
 #
 
-cache: cache/style.css cache/script.js
-cache/style.css: assets/style.css
+cache: \
+	cache/styleguide.css \
+	cache/styleguide.js \
+	cache/figure.css \
+	cache/figure.js
+cache/%.css: assets/%.css
 	@${bin}/postcss -u postcss-cssnext -u cssnano $< -o $@
 	@ls -lah $@
-cache/script.js: assets/script.js
+cache/%.js: assets/%.js
 	@${bin}/browserify -t babelify $< | ${bin}/uglifyjs -c warnings=false -m > $@
 	@ls -lah $@
 

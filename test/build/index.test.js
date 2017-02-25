@@ -25,19 +25,40 @@ test('blank extensions', t => {
 
 test('renders assets', t => {
   const result = build(FILES)
+  let file
 
-  t.true(result.files['styledown/script.js'].type === 'application/javascript')
-  t.true(result.files['styledown/style.css'].type === 'text/css')
+  file = result.files['styledown/styleguide.js']
+  t.true(file.type === 'application/javascript')
+  t.true(file.layout === 'styleguideJs')
 
-  t.true(result.files['styledown/script.js'].layout === 'script')
-  t.true(result.files['styledown/style.css'].layout === 'style')
+  file = result.files['styledown/styleguide.css']
+  t.true(file.type === 'text/css')
+  t.true(file.layout === 'styleguideCss')
+
+  file = result.files['styledown/figure.js']
+  t.true(file.type === 'application/javascript')
+  t.true(file.layout === 'figureJs')
+
+  file = result.files['styledown/figure.css']
+  t.true(file.type === 'text/css')
+  t.true(file.layout === 'figureCss')
 })
 
 test('respects skipAssets: true', t => {
   const result = build(FILES, { skipAssets: true })
+  let file
 
-  t.true(typeof result.files['styledown/script.js'] === 'undefined')
-  t.true(typeof result.files['styledown/style.css'] === 'undefined')
+  file = result.files['styledown/styleguide.js']
+  t.true(typeof file === 'undefined')
+
+  file = result.files['styledown/styleguide.css']
+  t.true(typeof file === 'undefined')
+
+  file = result.files['styledown/figure.js']
+  t.true(typeof file === 'undefined')
+
+  file = result.files['styledown/figure.js']
+  t.true(typeof file === 'undefined')
 })
 
 test('frames', t => {

@@ -10,9 +10,9 @@
     right: 0;
     font-size: 0.86em;
     opacity: 0;
-    transition: opacity 300ms linear, transform 300ms ease-out;
+    transition: opacity 150ms linear, transform 150ms ease-out;
     transform: scale(0.95);
-    transform-origin: 100% 100%;
+    transform-origin: 100% 300%;
     white-space: nowrap;
   }
 }
@@ -23,7 +23,7 @@
     white-space: nowrap;
     display: inline-block;
     background: white;
-    box-shadow: 0 2px 4px color(#888 alpha(10%));
+    box-shadow: 0 1px 5px color(#888 alpha(10%));
     border-radius: 2px;
   }
 
@@ -71,7 +71,7 @@
 
 *:hover > .styleguide-example-toolbar {
   opacity: 1;
-  transition: opacity 100ms linear, transform 100ms ease-out;
+  transition: opacity 75ms linear, transform 75ms ease-out;
   transform: scale(1);
 }
 

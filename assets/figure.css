@@ -3,6 +3,7 @@ html#styleguide-frame > body {
   background: transparent;
   margin: 0;
   padding: 0;
+  height: auto;
 }
 
 html#styleguide-frame > body {

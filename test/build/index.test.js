@@ -66,8 +66,8 @@ test('frames', t => {
   part = header.parts[1]
   t.true(part.id === 'header-2')
   t.true(part.type === 'example')
-  t.true(part.language === undefined)
-  t.true(part.source === undefined)
+  t.true(part.language === 'haml')
+  t.true(part.source === "= render 'header'")
   t.true(part.content === undefined)
   t.true(part.frameSrc === 'examples/components/header-2.html')
 
@@ -78,6 +78,6 @@ test('frames', t => {
 
   // part = file.part
   t.true(file.content === '= render \'header\'')
-  t.true(file.source === '= render \'header\'')
+  t.true(file.source === undefined)
   t.true(file.language === 'haml')
 })

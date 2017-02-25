@@ -1,14 +1,18 @@
 Buttons
 =======
 
-### btn
-Buttons are the essence of life and the raison d'etre of UI design. Live it, love it.
+### Buttons
+#### `.btn`
+
+Applies to `<a>` and `<button>`.
 
 ```example.jade
 a.btn.btn-primary Primary button
 ```
 
-### btn colors
+#### Colors
+#### `&.btn-default`
+Different colors are available.
 
 ```example.jade
 a.btn.btn-default Default
@@ -20,7 +24,8 @@ a.btn.btn-danger Danger
 a.btn.btn-link Link
 ```
 
-### btn sizes
+#### Sizes
+#### `&.btn-lg`
 Define sizes using `btn-lg`, `btn-sm`, and `btn-xs` classes.
 
 ```example.jade
@@ -38,7 +43,9 @@ p
   a.btn.btn-xs.btn-default btn-xs
 ```
 
-### btn-block
+### Button block
+#### `&.btn-block`
+
 Makes buttons occupy a full width (block).
 
 ```example.jade
@@ -47,7 +54,9 @@ Makes buttons occupy a full width (block).
   a.btn.btn-lg.btn-block.btn-default .btn-block
 ```
 
-### btn-group
+### Button group
+#### `.btn-group`
+
 Wraps a series of buttons in a group.
 
 ```example.jade
@@ -57,7 +66,9 @@ Wraps a series of buttons in a group.
   button.btn.btn-default Right
 ```
 
-### btn-toolbar
+### Toolbar
+#### `.btn-toolbar`
+
 Wraps a series of button groups in a toolbar for more complex components.
 
 ```example.jade

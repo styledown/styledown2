@@ -1,0 +1,51 @@
+.styleguide-section {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+    zoom: 1;
+  }
+
+  & > h3 {
+    border-bottom: solid 2px var(--line-color);
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+.styleguide-text {
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.styleguide-example {
+  margin-bottom: 16px;
+}
+
+/*
+ * "Literate style"
+ */
+
+@media (min-width: 768px) {
+  .styleguide-section.-literate-style {
+    & > .styleguide-text {
+      clear: both;
+      float: right;
+      width: 30%;
+      padding-left: 16px;
+    }
+
+    & > .styleguide-example {
+      float: left;
+      width: 70%;
+    }
+  }
+}
+
+/*
+ * Text
+ */
+
+.styleguide-text > :first-child {
+  margin-top: 0;
+}

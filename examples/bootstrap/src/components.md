@@ -1,7 +1,8 @@
 Components
 ==========
 
-### alert
+### Alert box
+#### `.alert`
 Provide contextual feedback messages for typical user actions
 with the handful of available and flexible alert messages. For inline
 dismissal, use the alerts jQuery plugin.
@@ -21,20 +22,21 @@ dismissal, use the alerts jQuery plugin.
   |  You must construct additional pylons. (alert-danger)
 ```
 
-### list-group
+### List group
+#### `ul.list-group`
 Simple lists and elements using `.list-group` and `.list-group-item`.
 
-```example.jade.-clear
+```example.jade
 ul.list-group
   li.list-group-item Apple
   li.list-group-item Orange
   li.list-group-item Banana
 ```
 
-#### With badges
-Use `span.badge`.
+#### `>> span.badge`
+Adds numeric badges.
 
-```example.jade.-clear
+```example.jade
 ul.list-group
   li.list-group-item
     span.badge 23
@@ -47,7 +49,8 @@ ul.list-group
     | Banana
 ```
 
-### pagination
+### Pagination
+#### `ul.pagination`
 
 Simple pagination inspired by Rdio, great for apps and
 search results. The large block is hard to miss, easily scalable, and
@@ -69,7 +72,8 @@ ul.pagination
     a(href='#')!= "&raquo;"
 ```
 
-### pager
+### Pager
+#### `ul.pager`
 By default, it centers links.
 
 ```example.jade.padded
@@ -80,7 +84,9 @@ ul.pager
     a Next
 ```
 
-### label
+### Label
+#### `span.label`
+
 Used for labelling things that need labels.
 
 ```example.jade
@@ -92,7 +98,9 @@ span.label.label-warning Warning
 span.label.label-danger Danger
 ```
 
-### breadcrumbs
+### Breadcrumbs
+#### `ol.breadcrumb`
+
 Indicate the current page's location within a navigational hierarchy.
 Separators are automatically added in CSS through *:before* and *content*.
 
@@ -106,7 +114,9 @@ ol.breadcrumb
     | Data
 ```
 
-### panel
+### Panel
+#### `.panel`
+
 Panels (`.panel`) are white boxes. `.panel-body` provides the padding.
 
 ```example.jade
@@ -114,20 +124,20 @@ Panels (`.panel`) are white boxes. `.panel-body` provides the padding.
   .panel-body Basic panel example
 ```
 
-#### With heading
+#### `> .panel-heading`
 Add `.panel-heading` for a heading.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-heading Panel heading
   .panel-body
     p(style='padding: 20px') Content goes here
 ```
 
-#### With title
-Use `.panel-title` to make the text bigger.
+#### `>> .panel-title`
+Use it to make the text bigger.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-heading
     .panel-title Panel heading with title
@@ -135,38 +145,39 @@ Use `.panel-title` to make the text bigger.
     p(style='padding: 20px') Content goes here
 ```
 
-#### With footer
+#### `> .panel-footer`
 Add `.panel-footer` for a footer.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-body
     p(style='padding: 20px') Content goes here
   .panel-footer Panel footer
 ```
 
-#### Alternates
-Use `.panel-primary` (and so on).
+#### `&.panel-primary`
+There are variants for `primary`, `success`, `info`, `error`.
 
-```example.jade.-clear
+```example.jade
 .row
-  .col-sm-4
+  .col-xs-4
     .panel.panel-primary
       .panel-heading Primary
       .panel-body panel-primary
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-success
       .panel-heading Success
       .panel-body panel-success
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-info
       .panel-heading Info
       .panel-body panel-info
 ```
 
-### progress
+### Progress bar
+#### `.progress`
 Use `.progress` with `.progress-bar`.
 
 ```example.jade
@@ -206,8 +217,8 @@ Add classes to `.progress-bar`.
   .progress-bar.progress-bar-danger(style='width: 80%') progress-bar-danger
 ```
 
-#### Striped
-Add `.progress-bar-striped.active`.
+#### `&.progress-bar-striped`
+Striped variant.
 
 ```example.jade
 .progress

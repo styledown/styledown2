@@ -1,0 +1,17 @@
+/*
+ * Root
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--text-color);
+}

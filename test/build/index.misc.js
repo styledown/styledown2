@@ -14,13 +14,18 @@ test('block with code and class', t => {
         ~~~`
     }
   })
-  var header = out.files['components.html'].sections[0]
-  t.true(header.parts[0].type === 'text')
-  t.true(header.parts[0].content === '<p>This is a header</p>')
-  t.true(header.parts[1].type === 'example')
-  t.true(header.parts[1].language === 'haml')
-  t.true(header.parts[1].class === 'a b')
-  t.regex(header.parts[1].content, /= render 'header'/)
+
+  let header, part
+  header = out.files['components.html'].sections[0]
+  part = header.parts[0]
+  t.true(part.type === 'text')
+  t.true(part.content === '<p>This is a header</p>')
+
+  part = header.parts[1]
+  t.true(part.type === 'example')
+  t.true(part.isExample === true)
+  t.true(part.language === 'haml')
+  t.true(part.class === 'a b')
 })
 
 test('slugifying', t => {
@@ -160,4 +165,19 @@ test('text before headings without headings', t => {
   t.true(part.id === '_prelude-text')
   t.true(part.type === 'text')
   t.true(part.content === '<p>Hello</p>\n<ul>\n<li>World</li>\n</ul>')
+})
+
+test('adding base', t => {
+  var out = build({
+    'button.md': { contents: '...' },
+    'form/input.md': { contents: '...' }
+  })
+
+  let file
+
+  file = out.files['button.html']
+  t.true(file.base === '')
+
+  file = out.files['form/input.html']
+  t.true(file.base === '../')
 })

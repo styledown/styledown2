@@ -1,0 +1,18 @@
+{{{inherit}}}
+
+.styleguide-jumbo {
+  background: #fafafa;
+  border-radius: 3px;
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+  padding: 28vh 10%;
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.styleguide-jumbo + p {
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}

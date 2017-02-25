@@ -1,0 +1,100 @@
+/*
+ * Example
+ */
+
+.styleguide-example {
+  border-radius: 2px;
+  border: solid 2px transparent;
+}
+
+.styleguide-example::after {
+  content: '';
+  display: table;
+  clear: both;
+  zoom: 1;
+}
+
+/*
+ * Margin guides
+ */
+
+*.-expand > .styleguide-example-figure {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    opacity: .5;
+    background: transparent;
+    transition: opacity 100ms linear;
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    border: solid var(--figure-padding) color(var(--margin-color) alpha(5%));
+  }
+
+  &::after {
+    left: calc(var(--figure-padding) - 1px);
+    right: calc(var(--figure-padding) - 1px);
+    bottom: calc(var(--figure-padding) - 1px);
+    top: calc(var(--figure-padding) - 1px);
+    border: dashed 1px color(var(--margin-color) alpha(20%));
+    opacity: 0;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/*
+ * Clear variant
+ */
+
+.styleguide-example.-clear {
+  & {
+    border: 0;
+  }
+
+  & > .styleguide-example-figure {
+    padding: 0;
+  }
+
+  &:not(.-expand) > .styleguide-example-figure {
+    background: transparent;
+  }
+}
+
+/*
+ * Wide variant
+ */
+
+.styleguide-example.-full {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+@media (min-width: 1181px) {
+  .styleguide-example.-full {
+    margin-left: calc(-50vw + var(--body-width) / 2);
+    margin-right: calc(-50vw + var(--body-width) / 2);
+  }
+
+  html.-styleguide-sidebar-open .styleguide-example.-full {
+    margin-left: calc(-50vw + var(--sidebar-width) / 2 + var(--body-width) / 2 + 16px);
+    margin-right: calc(-50vw + var(--sidebar-width) / 2 + var(--body-width) / 2 + 16px);
+  }
+}
+
+/*
+ * Dark variant
+ */
+
+.styleguide-example.-dark > .styleguide-example-figure {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAAAAACoWZBhAAAAFklEQVQI12NQBQF2EGAghQkmwXxSmADZJQiZ2ZZ46gAAAABJRU5ErkJggg==");
+}

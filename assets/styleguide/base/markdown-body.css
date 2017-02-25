@@ -1,0 +1,50 @@
+body,
+.markdown-body {
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.markdown-body {
+  & h1 {
+    font-size: 2.98em;
+    font-weight: 300;
+  }
+
+  & h2 {
+    font-size: 2.48em;
+  }
+
+  & h3 {
+    font-size: 1.728em; /* 3msu */
+  }
+
+  & h4 {
+    font-size: 1.2em;
+  }
+
+  & h4 + p,
+  & h4 + h4 {
+    margin-top: -12px;
+  }
+
+  & code {
+    background: rgba(200, 200, 200, 0.02);
+    color: var(--gray-text);
+  }
+
+  & h4 > code {
+    color: var(--heading-color);
+    background: rgba(200, 200, 200, 0.1);
+  }
+
+  & h4 code::before,
+  & h4 code::after {
+    display: none;
+  }
+
+  & h4 > em {
+    font-weight: normal;
+    font-style: normal;
+    color: var(--gray-text);
+  }
+}

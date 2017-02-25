@@ -2,7 +2,9 @@ const addClass = require('dom101/add-class')
 const removeClass = require('dom101/remove-class')
 const ready = require('dom101/ready')
 const on = require('dom101/on')
+const each = require('dom101/each')
 const requestAnimationFrame = require('raf')
+const iframeResizer = require('iframe-resizer/js/iframeResizer')
 
 !(function () {
   ready(function () {
@@ -16,6 +18,7 @@ const requestAnimationFrame = require('raf')
   function decorateExample ($example) {
     var $figure = $example.querySelector('.styleguide-example-figure')
     var $source = $example.querySelector('.styleguide-example-source')
+    var $viewSource = $figure.querySelector('[data-js-view-source]')
     var collapsed
 
     function collapse () {
@@ -34,7 +37,7 @@ const requestAnimationFrame = require('raf')
       return collapsed ? expand() : collapse()
     }
 
-    $figure.addEventListener('click', function () { toggle() })
+    on($viewSource, 'click', toggle)
     collapse()
   }
 }())
@@ -74,4 +77,12 @@ const requestAnimationFrame = require('raf')
   requestAnimationFrame(() => {
     addClass($html, '-styleguide-loaded')
   })
+}())
+
+/*
+ * Auto size iframes
+ */
+
+!(function () {
+  iframeResizer({}, 'iframe')
 }())

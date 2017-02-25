@@ -1,0 +1,24 @@
+body,
+.markdown-body {
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.markdown-body {
+  & h1 {
+    font-size: 2.98em;
+    font-weight: 300;
+  }
+
+  & h2 {
+    font-size: 2.48em;
+  }
+
+  & h3 {
+    font-size: 1.728em; /* 3msu */
+  }
+
+  & h4 {
+    font-size: 1.2em;
+  }
+}

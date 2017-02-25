@@ -4,3 +4,8 @@ html#styleguide-frame > body {
   margin: 0;
   padding: 0;
 }
+
+html#styleguide-frame > body {
+  padding: 16px;
+  overflow: hidden;
+}

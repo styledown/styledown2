@@ -49,7 +49,7 @@ cache: \
 	cache/figure.css \
 	cache/figure.js
 cache/%.css: assets/%.css
-	@${bin}/postcss -u postcss-cssnext -u cssnano $< -o $@
+	@${bin}/postcss -u postcss-import -u postcss-cssnext -u cssnano $< -o $@
 	@ls -lah $@
 cache/%.js: assets/%.js
 	@${bin}/browserify -t babelify $< | ${bin}/uglifyjs -c warnings=false -m > $@

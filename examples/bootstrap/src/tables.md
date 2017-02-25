@@ -5,7 +5,7 @@
 #### Default
 A basic table.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   table.table
     thead
@@ -31,7 +31,7 @@ A basic table.
 #### table-striped
 Only affects `<tbody>`.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   table.table.table-striped
     thead
@@ -57,7 +57,7 @@ Only affects `<tbody>`.
 #### table-bordered
 Adds borders around cells.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   table.table.table-bordered
     thead
@@ -83,7 +83,7 @@ Adds borders around cells.
 #### table-hover
 Adds hover effects to rows.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   table.table.table-hover
     thead
@@ -109,7 +109,7 @@ Adds hover effects to rows.
 #### table-condensed
 Makes cells less tall.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   table.table.table-condensed
     thead

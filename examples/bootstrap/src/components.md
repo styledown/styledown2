@@ -24,7 +24,7 @@ dismissal, use the alerts jQuery plugin.
 ### list-group
 Simple lists and elements using `.list-group` and `.list-group-item`.
 
-```example.jade.-clear
+```example.jade
 ul.list-group
   li.list-group-item Apple
   li.list-group-item Orange
@@ -34,7 +34,7 @@ ul.list-group
 #### With badges
 Use `span.badge`.
 
-```example.jade.-clear
+```example.jade
 ul.list-group
   li.list-group-item
     span.badge 23
@@ -117,7 +117,7 @@ Panels (`.panel`) are white boxes. `.panel-body` provides the padding.
 #### With heading
 Add `.panel-heading` for a heading.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-heading Panel heading
   .panel-body
@@ -127,7 +127,7 @@ Add `.panel-heading` for a heading.
 #### With title
 Use `.panel-title` to make the text bigger.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-heading
     .panel-title Panel heading with title
@@ -138,7 +138,7 @@ Use `.panel-title` to make the text bigger.
 #### With footer
 Add `.panel-footer` for a footer.
 
-```example.jade.-clear
+```example.jade
 .panel.panel-default
   .panel-body
     p(style='padding: 20px') Content goes here
@@ -148,19 +148,19 @@ Add `.panel-footer` for a footer.
 #### Alternates
 Use `.panel-primary` (and so on).
 
-```example.jade.-clear
+```example.jade
 .row
-  .col-sm-4
+  .col-xs-4
     .panel.panel-primary
       .panel-heading Primary
       .panel-body panel-primary
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-success
       .panel-heading Success
       .panel-body panel-success
 
-  .col-sm-4
+  .col-xs-4
     .panel.panel-info
       .panel-heading Info
       .panel-body panel-info

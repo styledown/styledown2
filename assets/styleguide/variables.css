@@ -1,0 +1,14 @@
+/*
+ * Variables
+ */
+
+:root {
+  --sidebar-width: 256px;
+  --line-color: color(#789 alpha(12%));
+  --margin-color: dodgerblue;
+  --figure-small-padding: 8px;
+  --figure-padding: 16px;
+  --body-width: 960px;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --text-color: #33383a;
+}

@@ -1,0 +1,13 @@
+/*
+ * Root
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--text-color);
+}
+

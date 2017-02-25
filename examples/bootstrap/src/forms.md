@@ -33,7 +33,7 @@ labels and controls in .form-group for optimum spacing.
 
 Great for forms that only occupy one line for whatever reason. In screens 768px wide and below (tablets), form elements will stack vertically.
 
-```example.jade.-wide
+```example.jade.-lg
 form.form-inline
   .form-group
     .input-group

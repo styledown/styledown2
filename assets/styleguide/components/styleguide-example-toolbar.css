@@ -10,16 +10,57 @@
     font-size: 0.86em;
     opacity: 0;
     transition: opacity 300ms linear;
+    white-space: nowrap;
+  }
+}
+
+.button-group {
+  & {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
   }
 
-  & > button {
-    background: #333;
+  & + .button-group {
+    margin-left: 8px;
+  }
+
+  & > button,
+  & > .button {
+    background: color(#333 alpha(80%));
     color: #fff;
-    border-radius: 32px;
-    padding: 4px 8px;
+    padding: 0 8px;
     border: 0;
     margin: 0;
     cursor: pointer;
+
+    height: 24px;
+    line-height: 24px;
+    float: left;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover,
+    &:active {
+      background: color(#333 alpha(100%));
+    }
+
+    &.-active {
+      background: var(--margin-color);
+      color: white;
+    }
+  }
+
+  & > :first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  & > :last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 }
 

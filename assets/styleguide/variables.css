@@ -11,4 +11,7 @@
   --body-width: 960px;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   --text-color: #33383a;
+  --gray-text: #83888a;
+  --heading-color: #25a;
+  --black: #111;
 }

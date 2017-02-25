@@ -21,4 +21,30 @@ body,
   & h4 {
     font-size: 1.2em;
   }
+
+  & h4 + p,
+  & h4 + h4 {
+    margin-top: -12px;
+  }
+
+  & code {
+    background: rgba(200, 200, 200, 0.02);
+    color: var(--gray-text);
+  }
+
+  & h4 > code {
+    color: var(--heading-color);
+    background: rgba(200, 200, 200, 0.1);
+  }
+
+  & h4 code::before,
+  & h4 code::after {
+    display: none;
+  }
+
+  & h4 > em {
+    font-weight: normal;
+    font-style: normal;
+    color: var(--gray-text);
+  }
 }

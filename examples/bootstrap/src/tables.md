@@ -1,8 +1,8 @@
 # Tables
 
 ### table
+#### `table.table`
 
-#### Default
 A basic table.
 
 ```example.jade
@@ -28,8 +28,8 @@ A basic table.
         td Fitzgerald
 ```
 
-#### table-striped
-Only affects `<tbody>`.
+#### `&.table-striped`
+Adds stripes to rows in `<tbody>`.
 
 ```example.jade
 .panel.panel-default
@@ -54,7 +54,7 @@ Only affects `<tbody>`.
         td Fitzgerald
 ```
 
-#### table-bordered
+#### `&.table-bordered`
 Adds borders around cells.
 
 ```example.jade
@@ -80,7 +80,7 @@ Adds borders around cells.
         td Fitzgerald
 ```
 
-#### table-hover
+#### `&.table-hover`
 Adds hover effects to rows.
 
 ```example.jade
@@ -106,7 +106,7 @@ Adds hover effects to rows.
         td Fitzgerald
 ```
 
-#### table-condensed
+#### `&.table-condensed`
 Makes cells less tall.
 
 ```example.jade

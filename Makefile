@@ -48,10 +48,10 @@ cache: \
 	cache/styleguide.js \
 	cache/figure.css \
 	cache/figure.js
-cache/%.css: assets/%.css
+cache/%.css: assets/%.css $(shell find assets -name '*.css')
 	@${bin}/postcss -u postcss-import -u postcss-cssnext -u cssnano $< -o $@
 	@ls -lah $@
-cache/%.js: assets/%.js
+cache/%.js: assets/%.js $(shell find assets -name '*.js')
 	@${bin}/browserify -t babelify $< | ${bin}/uglifyjs -c warnings=false -m > $@
 	@ls -lah $@
 

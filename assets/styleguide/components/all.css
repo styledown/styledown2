@@ -66,24 +66,51 @@
   list-style-type: none;
 }
 
-/* Parents */
-.styleguide-menu-item.-parent.-level-1 {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  font-weight: bold;
+.styleguide-menu {
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
-.styleguide-menu-item.-parent.-level-1 > .title {
-  display: block;
-  font-weight: bold;
-  padding: 4px 16px;
+/* Project name */
+.styleguide-menu-item.-level-1:first-child {
+  & > .link,
+  & > .title {
+    font-weight: 300;
+    color: var(--black);
+    font-size: 1.2em; /* 1msu */
+    margin-bottom: 16px;
+  }
+}
+
+/* Parents */
+.styleguide-menu-item.-parent.-level-1 {
+  & {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
+  }
+
+  & > .title {
+    display: block;
+    font-weight: bold;
+    padding: 4px 16px;
+    color: var(--black);
+  }
 }
 
 /* Links */
 .styleguide-menu-item > .link {
-  display: block;
-  font-weight: normal;
-  padding: 4px 16px;
+  & {
+    display: block;
+    font-weight: normal;
+    padding: 2px 16px;
+  }
+
+  &,
+  &:visited {
+    color: var(--gray-text);
+    text-decoration: none;
+  }
 }
 
 /* Active links */

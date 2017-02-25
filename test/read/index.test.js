@@ -13,6 +13,7 @@ test('read: works on paths', t => {
     'index.md',
     'tables.md',
     'templates/head.html',
+    'templates/styleguideCss.css',
     'templates/title.html'
   ])
 

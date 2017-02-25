@@ -6,11 +6,13 @@
   & {
     position: absolute;
     z-index: 1;
-    top: -32px;
+    top: -16px;
     right: 0;
     font-size: 0.86em;
     opacity: 0;
-    transition: opacity 300ms linear;
+    transition: opacity 300ms linear, transform 300ms ease-out;
+    transform: scale(0.95);
+    transform-origin: 100% 100%;
     white-space: nowrap;
   }
 }
@@ -69,7 +71,8 @@
 
 *:hover > .styleguide-example-toolbar {
   opacity: 1;
-  transition: opacity 50ms linear;
+  transition: opacity 100ms linear, transform 100ms ease-out;
+  transform: scale(1);
 }
 
 /*

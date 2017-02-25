@@ -43,7 +43,7 @@ p
 #### `&.btn-info`
 #### `&.btn-warning`
 #### `&.btn-danger`
-**Color variants**
+Color variants
 
 ```example.jade
 a.btn.btn-default Default

@@ -166,3 +166,18 @@ test('text before headings without headings', t => {
   t.true(part.type === 'text')
   t.true(part.content === '<p>Hello</p>\n<ul>\n<li>World</li>\n</ul>')
 })
+
+test('adding base', t => {
+  var out = build({
+    'button.md': { contents: '...' },
+    'form/input.md': { contents: '...' }
+  })
+
+  let file
+
+  file = out.files['button.html']
+  t.true(file.base === '')
+
+  file = out.files['form/input.html']
+  t.true(file.base === '../')
+})

@@ -4,7 +4,12 @@
 
 .styleguide-example-figure {
   & {
+    position: relative;
+  }
+
+  & > .content {
     overflow: hidden;
+    overflow-x: auto;
     padding: 0; /* var(--figure-padding) */
     background:
       linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
@@ -12,10 +17,69 @@
     position: relative;
   }
 
-  & > iframe {
+  & > .content > iframe {
     margin: 0;
     padding: 0;
     border: 0;
     width: 100%;
+    height: 32px; /* default height, it'll auto-resize */
+    box-shadow: inset 0 0 0 16px transparent;
+    transition: box-shadow 50ms linear;
+    margin-bottom: -6px; /* There's some extra space below the iframe... no idea why! */
   }
+
+  &.-sm > .content > iframe {
+    width: 480px;
+  }
+
+  &.-md > .content > iframe {
+    width: 768px;
+  }
+
+  &.-lg > .content > iframe {
+    width: 992px;
+  }
+
+  &.-xl > .content > iframe {
+    width: 1200px;
+  }
+
+  &:hover {
+    &.-sm,
+    &.-md,
+    &.-lg,
+    &.-xl {
+      & > .content > iframe {
+        box-shadow: inset 0 0 0 16px color(var(--margin-color) alpha(7%));
+      }
+    }
+  }
+}
+
+.styleguide-example-figure > .content {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: color(#888 alpha(40%));
+  }
+
+  &::-webkit-scrollbar-track {
+    background: color(#888 alpha(10%));
+  }
+}
+
+/*
+ * Margin guides
+ */
+
+*.-expand > .styleguide-example-figure > .content > iframe {
+  box-shadow: inset 0 0 0 16px color(var(--margin-color) alpha(7%));
 }

@@ -226,8 +226,11 @@ Striped variant.
 ```
 
 ### Jumbotron
+#### `.jumbotron`
 
-```example.jade.-full
+A big banner used by landing pages of startups with no designers.
+
+```example.jade.-md
 .container
   .jumbotron
     h3 Hello, earthlings!

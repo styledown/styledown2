@@ -15,4 +15,6 @@
   --gray-text: #83888a;
   --heading-color: #25a;
   --black: #111;
+  --panel-shadow: 0 2px 4px color(#888 alpha(10%));
+  --light-gray-text: #ccc;
 }

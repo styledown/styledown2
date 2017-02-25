@@ -1,0 +1,8 @@
+.styleguide-search-bar {
+  background: white;
+  box-shadow: var(--panel-shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  color: var(--light-gray-text);
+  cursor: text;
+}

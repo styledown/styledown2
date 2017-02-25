@@ -236,6 +236,7 @@ htlm.-styleguide-loaded .styleguide-sidebar-button {
   z-index: 3;
   position: relative;
   border-right: solid 1px var(--line-color);
+  background: #fcfcfc;
 }
 
 html.-styleguide-loaded .styleguide-sidebar-contents {

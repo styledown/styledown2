@@ -196,9 +196,10 @@ htlm.-styleguide-loaded .styleguide-sidebar-button {
     box-shadow 150ms ease-out;
 }
 
-.styleguide-sidebar-button:hover,
-.styleguide-sidebar-button:focus {
-  box-shadow: 0 4px 8px rgba(0, 40, 80, .2);
+.styleguide-sidebar-button:hover::before,
+.styleguide-sidebar-button:focus::before {
+  border-top-color: var(--accent-color);
+  border-right-color: var(--accent-color);
 }
 
 .styleguide-sidebar-button::before {
@@ -206,8 +207,8 @@ htlm.-styleguide-loaded .styleguide-sidebar-button {
   display: inline-block;
   width: 12px;
   height: 12px;
-  border-top: solid 1px #333;
-  border-right: solid 1px #333;
+  border-top: solid 1px var(--text-color);
+  border-right: solid 1px var(--text-color);
   transform: rotate(45deg);
   transition: transform 150ms ease-out;
   position: relative;

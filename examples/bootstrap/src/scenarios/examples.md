@@ -4,7 +4,7 @@
 Typical log in form involving a panel, input groups, and buttons.
 
 ```example.jade.-wide
-.col-xs-6.col-xs-offset-3
+.col-sm-6.col-sm-offset-3
   .panel.panel-default
     .panel-body
       p: .input-group

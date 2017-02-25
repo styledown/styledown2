@@ -76,7 +76,7 @@
  * Responsive
  */
 
-@media (max-width: 480px) or (pointer: course) {
+@media (max-width: 480px), (pointer: course) {
   .styleguide-example-toolbar {
     position: relative;
     opacity: 1;

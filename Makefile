@@ -92,4 +92,4 @@ publish-example: examples/bootstrap/html examples/bootstrap/html/README.md
 	${bin}/git-update-ghpages --force --branch gh-pages \
 		styledown/bootstrap-styleguide $<
 
-.PHONY: examples examples/bootstrap/html cache
+.PHONY: examples examples/bootstrap/html cache dist/styledown-external.js

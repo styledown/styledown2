@@ -26,12 +26,14 @@ const hasClass = require('dom101/has-class')
     function collapse () {
       addClass($example, '-collapse')
       removeClass($example, '-expand')
+      removeClass($viewSource, '-active')
       collapsed = true
     }
 
     function expand () {
       removeClass($example, '-collapse')
       addClass($example, '-expand')
+      addClass($viewSource, '-active')
       collapsed = false
     }
 

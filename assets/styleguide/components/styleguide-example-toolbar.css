@@ -5,8 +5,9 @@
 .styleguide-example-toolbar {
   & {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
+    z-index: 1;
+    top: -32px;
+    right: 0;
     font-size: 0.86em;
     opacity: 0;
     transition: opacity 300ms linear;
@@ -19,6 +20,9 @@
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
+    background: white;
+    box-shadow: 0 2px 4px color(#888 alpha(10%));
+    border-radius: 2px;
   }
 
   & + .button-group {
@@ -27,8 +31,8 @@
 
   & > button,
   & > .button {
-    background: color(#333 alpha(80%));
-    color: #fff;
+    background: white;
+    color: var(--accent-color);
     padding: 0 8px;
     border: 0;
     margin: 0;
@@ -42,28 +46,65 @@
       outline: 0;
     }
 
-    &:hover,
-    &:active {
-      background: color(#333 alpha(100%));
+    &:hover {
+      background: color(var(--accent-color) alpha(5%));
     }
 
     &.-active {
-      background: var(--margin-color);
+      background: var(--accent-color);
       color: white;
     }
   }
 
   & > :first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
   }
 
   & > :last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
   }
 }
 
 *:hover > .styleguide-example-toolbar {
   opacity: 1;
+  transition: opacity 50ms linear;
 }
+
+/*
+ * Responsive
+ */
+
+@media (max-width: 480px) or (pointer: course) {
+  .styleguide-example-toolbar {
+    position: relative;
+    opacity: 1;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding-top: 4px;
+  }
+
+  .button-group {
+    box-shadow: none;
+  }
+
+  .button-group > .button,
+  .button-group > button {
+    background: white;
+    color: color(var(--gray-text) alpha(50%));
+
+    &:hover {
+      background: transparent;
+      color: var(--text-color);
+    }
+
+    &.-active,
+    &:active {
+      color: var(--margin-color);
+      background: transparent;
+    }
+  }
+}
+

@@ -57,24 +57,20 @@
 }
 
 .styleguide-example-figure > .content {
-  &::-moz-scrollbar,
   &::-webkit-scrollbar {
     width: 4px;
     height: 4px;
   }
 
-  &::-moz-scrollbar-thumb,
   &::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: 2px;
   }
 
-  &::-moz-scrollbar-thumb,
   &::-webkit-scrollbar-thumb {
     background: color(#888 alpha(40%));
   }
 
-  &::-moz-scrollbar-track,
   &::-webkit-scrollbar-track {
     background: color(#888 alpha(10%));
   }
@@ -86,35 +82,4 @@
 
 *.-expand > .styleguide-example-figure > .content > iframe {
   box-shadow: inset 0 0 0 16px color(var(--margin-color) alpha(7%));
-  /* &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    opacity: .5;
-    background: transparent;
-    transition: opacity 100ms linear;
-    pointer-events: none;
-  }
-
-  &::before {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    border: solid var(--figure-padding) color(var(--margin-color) alpha(5%));
-  }
-
-  &::after {
-    left: calc(var(--figure-padding) - 1px);
-    right: calc(var(--figure-padding) - 1px);
-    bottom: calc(var(--figure-padding) - 1px);
-    top: calc(var(--figure-padding) - 1px);
-    border: dashed 1px color(var(--margin-color) alpha(20%));
-    opacity: 0;
-  }
-
-  &:hover::before,
-  &:hover::after {
-    opacity: 1;
-  } */
 }

@@ -49,7 +49,7 @@ form.form-inline
 
 Use Bootstrap's grid classes to align labels.
 
-```example.jade
+```example.jade.-md
 form.form-horizontal
   .form-group
     label.col-sm-2.control-label Email

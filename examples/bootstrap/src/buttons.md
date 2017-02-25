@@ -10,23 +10,17 @@ Applies to `<a>` and `<button>`.
 a.btn.btn-primary Primary button
 ```
 
-#### Colors
-#### `&.btn-default`
-Different colors are available.
+#### `&.btn-link`
+**Link button** without any borders
 
 ```example.jade
-a.btn.btn-default Default
-a.btn.btn-primary Primary
-a.btn.btn-success Success
-a.btn.btn-info Info
-a.btn.btn-warning Warning
-a.btn.btn-danger Danger
 a.btn.btn-link Link
 ```
 
-#### Sizes
+#### `&.btn-xs`
+#### `&.btn-sm`
 #### `&.btn-lg`
-Define sizes using `btn-lg`, `btn-sm`, and `btn-xs` classes.
+**Sizes** - Define sizes using `btn-lg`, `btn-sm`, and `btn-xs` classes.
 
 ```example.jade
 p
@@ -41,6 +35,23 @@ p
 p
   a.btn.btn-xs.btn-primary X-Small
   a.btn.btn-xs.btn-default btn-xs
+```
+
+#### `&.btn-default`
+#### `&.btn-primary`
+#### `&.btn-success`
+#### `&.btn-info`
+#### `&.btn-warning`
+#### `&.btn-danger`
+**Color variants**
+
+```example.jade
+a.btn.btn-default Default
+a.btn.btn-primary Primary
+a.btn.btn-success Success
+a.btn.btn-info Info
+a.btn.btn-warning Warning
+a.btn.btn-danger Danger
 ```
 
 ### Button block

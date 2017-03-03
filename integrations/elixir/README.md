@@ -1,6 +1,6 @@
 # Styledown2Source
 
-**TODO: Add description**
+> Write maintainable CSS styleguides using Markdown
 
 ## Installation
 

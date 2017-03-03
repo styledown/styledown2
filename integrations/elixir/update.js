@@ -22,13 +22,15 @@ const MIX_EXS =
     [
       app: :styledown2_source,
       version: @version,
+      description: @description,
       elixir: "~> 1.3",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      deps: deps(),
       source_url: "https://github.com/styledown/styledown2",
       homepage_url: "https://github.com/styledown/styledown2",
-      package: package
+      docs: docs,
+      package: package,
+      deps: deps,
     ]
   end
 
@@ -37,15 +39,25 @@ const MIX_EXS =
   end
 
   defp deps do
-    []
+    [
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev}
+    ]
   end
 
   def package do
     [
-      maintaners: ["Rico Sta. Cruz"],
+      maintainers: ["Rico Sta. Cruz"],
       licenses: ["MIT"],
       files: ["lib", "mix.exs", "README.md"],
       links: %{github: "https://github.com/styledown/styledown2"}
+    ]
+  end
+
+  def docs do
+    [
+      source_ref: "v#{@version}",
+      main: "readme"
     ]
   end
 end

@@ -35,9 +35,21 @@ rubygem: \
 # Pushes the ruby gem to rubygems.org
 #
 
-rubygem-push: rubygem
+publish-rubygem: rubygem
 	@echo "==> pushing gem"
 	@cd integrations/ruby && gem push *.gem
+
+hex: \
+	integrations/elixir \
+	dist/styledown-external.js \
+	package.json \
+	integrations/elixir/update.js
+	@echo "--- building: integrations/elixir/ (hex)"
+	@cd integrations/elixir && node update.js
+
+publish-hex: hex
+	@echo "==> pushing hex package"
+	@cd integrations/elixir && mix hex.publish
 
 #
 # Cached version of js/css

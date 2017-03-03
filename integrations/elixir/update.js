@@ -49,7 +49,7 @@ const MIX_EXS =
     [
       maintainers: ["Rico Sta. Cruz"],
       licenses: ["MIT"],
-      files: ["lib", "mix.exs", "README.md"],
+      files: ["lib", "mix.exs", "README.md", "vendor"],
       links: %{github: "https://github.com/styledown/styledown2"}
     ]
   end

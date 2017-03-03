@@ -46,6 +46,7 @@ hex: \
 	integrations/elixir/update.js
 	@echo "--- building: integrations/elixir/ (hex)"
 	@cd integrations/elixir && node update.js
+	@cd integrations/elixir && mix deps.get
 
 publish-hex: hex
 	@echo "==> pushing hex package"

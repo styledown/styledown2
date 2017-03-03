@@ -1,7 +1,7 @@
 {
   "name": "styledown2",
   "description": "Write maintainable CSS styleguides using Markdown.",
-  "version": "2.0.0-pre11",
+  "version": "2.0.0-pre12",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "bugs": {
     "url": "https://github.com/styledown/styledown/issues"

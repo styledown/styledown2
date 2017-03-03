@@ -13,13 +13,23 @@ const MIX_EXS =
 `defmodule Styledown2Source.Mixfile do
   use Mix.Project
 
+  @version "${VERSION.replace(/\.pre/, '-pre')}"
+  @description """
+  Write maintainable CSS styleguides using Markdown.
+  """
+
   def project do
-    [app: :styledown2_source,
-     version: "${VERSION.replace(/\.pre/, '-pre')}",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :styledown2_source,
+      version: @version,
+      elixir: "~> 1.3",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps(),
+      source_url: "https://github.com/styledown/styledown2",
+      homepage_url: "https://github.com/styledown/styledown2",
+      package: package
+    ]
   end
 
   def application do
@@ -29,7 +39,17 @@ const MIX_EXS =
   defp deps do
     []
   end
-end`
+
+  def package do
+    [
+      maintaners: ["Rico Sta. Cruz"],
+      licenses: ["MIT"],
+      files: ["lib", "mix.exs", "README.md"],
+      links: %{github: "https://github.com/styledown/styledown2"}
+    ]
+  end
+end
+`
 
 mkdirp('vendor/')
 writeFileSync('mix.exs', MIX_EXS, 'utf-8')
